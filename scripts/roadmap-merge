@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+# Merge per-repo ROADMAP.md row changes into the canonical docs/ROADMAP.md (roadmap F-15).
+# Each row has a unique ID and an owning repo; take each repo's version of its own rows,
+# and union the Changelog entries (newest first).
+# SCAFFOLD: not implemented.
+echo "roadmap-merge is not implemented yet (F-15)." >&2
+exit 1

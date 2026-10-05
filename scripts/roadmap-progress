@@ -1,0 +1,68 @@
+#!/usr/bin/env node
+// Recount ROADMAP.md row statuses per phase and print the §3 progress table.
+//   scripts/roadmap-progress [path/to/ROADMAP.md]          print
+//   scripts/roadmap-progress --write [path/to/ROADMAP.md]  replace the §3 table in place
+// Readiness = DONE / (total - DEFERRED - DROPPED), rounded; "n/a" when the denominator is 0.
+import { readFileSync, writeFileSync } from "node:fs";
+
+const args = process.argv.slice(2);
+const write = args[0] === "--write";
+if (write) args.shift();
+const path = args[0] ?? "ROADMAP.md";
+const text = readFileSync(path, "utf8");
+const lines = text.split("\n");
+
+const STATUSES = ["DONE", "IN PROGRESS", "TODO", "BLOCKED", "DEFERRED", "DROPPED"];
+const ROW = /^\| ((?:F|M\d|P|X|H|L|C|W|D)-\d+) \|/;
+
+const counts = new Map();
+let phase = null;
+for (const line of lines) {
+  const heading = line.match(/^## \d+\. Phase (\d+)\b/);
+  if (heading) { phase = Number(heading[1]); continue; }
+  if (/^## /.test(line)) { phase = null; continue; }
+  if (phase === null || !ROW.test(line)) continue;
+  const status = line.split("|")[5]?.trim();
+  if (!STATUSES.includes(status)) throw new Error(`Unknown status "${status}" in: ${line}`);
+  const c = counts.get(phase) ?? Object.fromEntries(STATUSES.map((s) => [s, 0]));
+  c[status] += 1;
+  counts.set(phase, c);
+}
+
+// Keep the existing phase labels from the §3 table.
+const tableStart = lines.findIndex((l) => l.startsWith("| Phase | Total |"));
+if (tableStart < 0) throw new Error("§3 progress table not found");
+let tableEnd = tableStart + 2;
+while (lines[tableEnd]?.startsWith("|")) tableEnd++;
+const labels = new Map();
+for (const l of lines.slice(tableStart + 2, tableEnd)) {
+  const label = l.split("|")[1].trim();
+  const n = label.match(/^(\d+) /);
+  if (n) labels.set(Number(n[1]), label);
+}
+
+const pct = (c, total) => {
+  const denom = total - c.DEFERRED - c.DROPPED;
+  return denom === 0 ? "n/a" : `${Math.round((100 * c.DONE) / denom)}%`;
+};
+const row = (label, c, bold) => {
+  const total = STATUSES.reduce((s, k) => s + c[k], 0);
+  const cells = [label, total, ...STATUSES.map((s) => c[s]), pct(c, total)].map(String);
+  return `| ${(bold ? cells.map((x) => `**${x}**`) : cells).join(" | ")} |`;
+};
+
+const all = Object.fromEntries(STATUSES.map((s) => [s, 0]));
+const out = [lines[tableStart], lines[tableStart + 1]];
+for (const p of [...counts.keys()].sort((a, b) => a - b)) {
+  const c = counts.get(p);
+  for (const s of STATUSES) all[s] += c[s];
+  out.push(row(labels.get(p) ?? `${p}`, c, false));
+}
+out.push(row("All", all, true));
+
+if (write) {
+  lines.splice(tableStart, tableEnd - tableStart, ...out);
+  writeFileSync(path, lines.join("\n"));
+} else {
+  console.log(out.join("\n"));
+}
