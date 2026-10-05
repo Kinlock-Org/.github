@@ -10,7 +10,7 @@ Implementing the vault (`kinlock-contracts` `feat/vault`, roadmap M1-05..M1-10) 
 - `set_caps` requires `MIN_AMOUNT <= max_lock_amount <= max_total_locked`, so a tiny cap can't act as a silent pause.
 - The constructor writes a storage layout version (`STORAGE_VERSION = 1`); an upgrade that changes the layout must bump it and migrate.
 ## Consequences / trade-offs
-- On testnet today (`max_entry_ttl` = 3,110,400 ledgers ≈ 180 days at a 5 s target close, read with `stellar network settings` on 2026-10-05), a 180-day lock plus 30-day grace doesn't fit, so locks expiring more than about 150 days ahead are rejected. `MAX_LOCK_DURATION` must be reconciled with this (DEC-07).
+- On testnet (`max_entry_ttl` = 3,110,400 ledgers ≈ 180 days at a 5 s target close, read with `stellar network settings` on 2026-10-05) a contract can extend an entry to at most one ledger less. 150 + 30 days needs exactly 3,110,400 ledgers, one too many, so `MAX_LOCK_DURATION` is **149 days** (resolves DEC-07). Contract tests run with the real network limit.
 - TTL is counted in ledgers and converted from seconds at an assumed 5 s close; faster ledgers shorten real-world coverage. The 30-day grace absorbs small drift.
 ## Docs updated
-Pending roadmap F-19: `ARCHITECTURE.md` §4.1 (effective max duration), §4.2, §4.3, and `ARCHITECTURE_ESSENTIALS.md` §5.
+`ARCHITECTURE.md` §4.1 and E12 (149 days), `PRD.md` §13 open question 6. Still pending under F-19: `ARCHITECTURE.md` §4.2, §4.3 and `ARCHITECTURE_ESSENTIALS.md` §5.
