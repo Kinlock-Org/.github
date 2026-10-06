@@ -38,5 +38,11 @@ for repo in "$@"; do
   for rulebook in AGENTS.md CLAUDE.md; do
     compare_or_write "$HERE/templates/$rulebook" "$repo/$rulebook"
   done
+  # ADRs the repo has but the canonical copy doesn't are drift too.
+  if [[ $check -eq 1 && -d "$repo/docs/adr" ]]; then
+    for adr in "$repo"/docs/adr/*.md; do
+      [[ -f "$HERE/docs/adr/$(basename "$adr")" ]] || { echo "not in canonical docs: $adr" >&2; status=1; }
+    done
+  fi
 done
 exit $status
