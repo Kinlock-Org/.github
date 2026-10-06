@@ -361,8 +361,8 @@ Resolve each with an ADR and link it here. Move resolved rows to the bottom with
 | DEC-19 | Pilot market(s) | M0-16 | Open |
 | DEC-20 | Supported-countries policy (who decides, criteria, restricted jurisdictions) | M0-17 | Open |
 | DEC-21 | Enforce attester-country scope on-chain too, or registry CI only (default: CI only) | M1-29 | Open |
-| DEC-22 | TypeScript tooling: linter, test runner, dev/script runner, and i18n library | M2-01, M3-01 | Open |
-| DEC-23 | JSON Schema validator for registry CI | M1-24 | Open |
+| DEC-22 | TypeScript tooling: linter, test runner, dev/script runner, and i18n library | M2-01, M3-01 | Resolved 2026-10-06: Biome, Vitest, tsx; built-in i18n helper (ADR-0021) |
+| DEC-23 | JSON Schema validator for registry CI | M1-24 | Resolved 2026-10-06: Ajv + ajv-formats (ADR-0021) |
 
 ---
 
@@ -523,6 +523,7 @@ Newest first. One entry per PR. Required for every contribution (see §2).
 
 | Date | PR / ref | Repo | Rows touched | Summary |
 |---|---|---|---|---|
+| 2026-10-06 | `docs/adr-ts-tooling` | org | DEC-22, DEC-23 resolved (no row changes) | ADR-0021: Biome, Vitest, tsx, Ajv + ajv-formats; the app keeps its built-in i18n helper |
 | 2026-10-06 | `chore/roadmap-merge` | org | DONE: F-08, F-14, F-15, F-17, W-03 | Added `scripts/roadmap-merge` (three-way merge against the last merged copy; conflicts reported, never guessed) and merged every repo's ROADMAP.md into the canonical copy, then synced it to all repos. Verified: org exists with an owner; `docs-in-sync` and `roadmap-check` fail and pass correctly; templates and the CONTRIBUTING rule are in every repo. F-09 stays IN PROGRESS (code of conduct is still a draft) |
 | 2026-10-06 | `chore/testnet-multisig-deploy` | contracts | DONE: M1-19 | Testnet contract `CCSHDQFRYFC3AHV5NE6ULQW6X2CMG5RPANBORDXJGSUD6UKECASJQBRI` with a 2-of-3 multisig admin (verified: one signature rejected `TxBadAuth`, two accepted), test attester added, Circle testnet USDC allowlisted. Adds `scripts/multisig-invoke.sh` and `deployments/testnet-setup.md`; vendored docs resynced (ADR-0020). Supersedes the single-key contract `CDIPDHSA…TLYL` |
 | 2026-10-06 | `feat/deploy-script` | contracts | DONE: M1-17 | `scripts/deploy.sh` (testnet/local, guarded mainnet, dry run, uploaded-hash check) and `scripts/gen-deployments-md.sh`. Deployed to testnet: `CDIPDHSAKP2MNANLYV6VRWVTWFJH3PQRHBRDBVMYNMRYKSR66JVPTLYL`, single-key admin `kinlock-testnet-deployer` (multisig admin, attesters, and testnet USDC remain M1-19) |
