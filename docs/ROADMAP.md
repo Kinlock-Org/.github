@@ -523,6 +523,7 @@ Newest first. One entry per PR. Required for every contribution (see §2).
 
 | Date | PR / ref | Repo | Rows touched | Summary |
 |---|---|---|---|---|
+| 2026-10-06 | `docs/sdk-public-api` | org | no row changes | ADR-0025: SDK public API gains amount conversion, reference hashing, and request-link helpers (owner-approved); AGENTS.md §8.2 updated |
 | 2026-10-06 | `docs/adr-ref-hash` | org | no row changes | ADR-0024: exact reference-hash and claim-link format (16-byte base64url salt; SHA-256 of NFC-trimmed UTF-8 reference followed by salt bytes; fragment-only claim links), as implemented in kinlock-sdk |
 | 2026-10-06 | `chore/license-and-publishing` | org | DONE: F-10. IN PROGRESS: F-11. DEC-02, DEC-03 resolved | Apache-2.0 for every repo (ADR-0022, `LICENSE` + template); TypeScript packages publish to npm under `@kinlock` from CI on tag (ADR-0023). F-11 waits on an owner creating the npm org and the `NPM_TOKEN` secret. Canonical roadmap re-merged from all repos (picks up M2-01, M3-01). `sync-docs.sh --check` now also fails on ADRs a repo has that the canonical copy lacks (it missed that drift before) |
 | 2026-10-06 | `chore/ts-tooling` | sdk | DONE: M2-01. DEC-22, DEC-23 resolved (ADR-0021) | Biome (lint + format), Vitest, and tsx added; CI now runs lint, typecheck, test, and build. Tests pin the SDK's public API to the approved list and the contract's enum order, and check the indexer refuses bad config |
