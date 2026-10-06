@@ -1,7 +1,139 @@
-#!/usr/bin/env bash
-# Merge per-repo ROADMAP.md row changes into the canonical docs/ROADMAP.md (roadmap F-15).
-# Each row has a unique ID and an owning repo; take each repo's version of its own rows,
-# and union the Changelog entries (newest first).
-# SCAFFOLD: not implemented.
-echo "roadmap-merge is not implemented yet (F-15)." >&2
-exit 1
+#!/usr/bin/env node
+// Merge per-repo ROADMAP.md copies into the canonical docs/ROADMAP.md (roadmap F-15).
+//
+//   scripts/roadmap-merge <canonical ROADMAP.md> --ancestor <path> <repo>=<path>... [--write]
+//   e.g. scripts/roadmap-merge docs/ROADMAP.md --ancestor /tmp/last-merged.md \
+//          contracts=../kinlock-contracts/ROADMAP.md registry=../kinlock-registry/ROADMAP.md \
+//          sdk=../kinlock-sdk/ROADMAP.md app=../kinlock-app/ROADMAP.md
+//
+// --ancestor is the canonical ROADMAP.md as of the last merge (when all copies were identical),
+// e.g. `git show <commit>:docs/ROADMAP.md`. It defaults to the canonical file itself, which is
+// only right if nothing edited the canonical copy since the last merge.
+//
+// Rules (AGENTS.md §12), a three-way merge against the ancestor:
+// - A row owned by a repo (its Repo column) is taken from that repo's copy.
+// - A cross-cutting row (org, all) or a decision row (DEC-…) is taken from whichever copy,
+//   including the canonical one, changed it relative to the ancestor. Two copies changing it
+//   differently is a conflict: reported, never guessed (exit 1).
+// - Rows that exist only in a repo copy are added after the row that precedes them there.
+// - Changelog entries are unioned (exact-line dedupe), each copy's relative order is kept, and
+//   the result is sorted newest first (stable within a date).
+// - "Last updated" becomes the latest date seen. Run scripts/roadmap-progress afterwards.
+// Without --write the merged file is printed to stdout.
+import { readFileSync, writeFileSync } from "node:fs";
+
+const args = process.argv.slice(2);
+const write = args.includes("--write");
+const ai = args.indexOf("--ancestor");
+const ancestorPath = ai >= 0 ? args[ai + 1] : null;
+const positional = args.filter((a, i) => a !== "--write" && i !== ai && i !== ai + 1);
+const [canonicalPath, ...repoArgs] = positional;
+if (!canonicalPath || repoArgs.length === 0) {
+  console.error("usage: roadmap-merge <canonical> <repo>=<path>... [--write]");
+  process.exit(2);
+}
+
+const ROW = /^\| ((?:[A-Z]+\d*|DEC)-\d+) \|/;
+const read = (p) => readFileSync(p, "utf8").split("\n");
+const rowId = (line) => line.match(ROW)?.[1] ?? null;
+const repoOf = (line) => line.split("|")[3]?.trim();
+
+const base = read(canonicalPath);
+const copies = repoArgs.map((a) => {
+  const [repo, path] = a.split("=");
+  return { repo, lines: read(path) };
+});
+
+const rowsOf = (lines) => {
+  const m = new Map();
+  for (const l of lines) {
+    const id = rowId(l);
+    if (id) m.set(id, l);
+  }
+  return m;
+};
+const ancestorRows = rowsOf(ancestorPath ? read(ancestorPath) : base);
+const copyRows = copies.map((c) => ({ repo: c.repo, rows: rowsOf(c.lines) }));
+// The canonical copy is a candidate too: it may have been edited directly (e.g. a docs PR).
+const candidates = [{ repo: "org", rows: rowsOf(base) }, ...copyRows];
+
+const conflicts = [];
+const choose = (id, baseLine) => {
+  const owner = baseLine && !id.startsWith("DEC-") ? repoOf(baseLine) : null;
+  const ownerCopy = copyRows.find((c) => c.repo === owner);
+  if (ownerCopy && ownerCopy.rows.has(id)) return ownerCopy.rows.get(id);
+  const ancestorLine = ancestorRows.get(id);
+  const changed = [
+    ...new Set(
+      candidates.map((c) => c.rows.get(id)).filter((l) => l !== undefined && l !== ancestorLine)
+    ),
+  ];
+  if (changed.length > 1) {
+    conflicts.push(`${id}:\n  ${changed.join("\n  ")}`);
+    return baseLine;
+  }
+  return changed[0] ?? baseLine;
+};
+
+// 1. Existing rows.
+let out = base.map((l) => {
+  const id = rowId(l);
+  return id && !/^\| \d{4}-\d{2}-\d{2} \|/.test(l) ? choose(id, l) : l;
+});
+
+// 2. Rows that only exist in repo copies, inserted after their predecessor in that copy.
+for (const c of copies) {
+  let prevId = null;
+  for (const l of c.lines) {
+    const id = rowId(l);
+    if (!id) continue;
+    if (!out.some((o) => rowId(o) === id)) {
+      const at = prevId ? out.findIndex((o) => rowId(o) === prevId) : -1;
+      if (at < 0) {
+        conflicts.push(`${id}: new row with no anchor in the canonical copy`);
+      } else {
+        out.splice(at + 1, 0, choose(id, undefined) ?? l);
+      }
+    }
+    prevId = id;
+  }
+}
+
+// 3. Changelog: union and sort newest first (stable within a date).
+const ENTRY = /^\| (\d{4}-\d{2}-\d{2}) \|/;
+const changelogStart = (lines) => lines.findIndex((l) => /^## \d+\. Changelog/.test(l));
+const entriesOf = (lines) => lines.slice(changelogStart(lines)).filter((l) => ENTRY.test(l));
+// Start from the longest changelog, then insert each missing entry just before its next known
+// neighbour in its own copy, so every copy's relative order is kept.
+const sources = [out, ...copies.map((c) => c.lines)].map(entriesOf);
+sources.sort((a, b) => b.length - a.length);
+const entries = [...new Set(sources[0])];
+for (const src of sources.slice(1)) {
+  for (let i = src.length - 1; i >= 0; i--) {
+    if (entries.includes(src[i])) continue;
+    const next = src.slice(i + 1).find((e) => entries.includes(e));
+    const at = next === undefined ? entries.length : entries.indexOf(next);
+    entries.splice(at, 0, src[i]);
+  }
+}
+entries.sort((a, b) => b.match(ENTRY)[1].localeCompare(a.match(ENTRY)[1]));
+const cs = changelogStart(out);
+const firstEntry = out.findIndex((l, i) => i > cs && ENTRY.test(l));
+let lastEntry = firstEntry;
+while (ENTRY.test(out[lastEntry + 1] ?? "")) lastEntry++;
+out.splice(firstEntry, lastEntry - firstEntry + 1, ...entries);
+
+// 4. Last updated = latest date anywhere in the changelog or the copies' headers.
+const LAST = /^\| \*\*Last updated\*\* \| (\d{4}-\d{2}-\d{2}) \|/;
+const dates = [entries[0]?.match(ENTRY)[1], ...[out, ...copies.map((c) => c.lines)]
+  .map((ls) => ls.find((l) => LAST.test(l))?.match(LAST)[1])].filter(Boolean).sort();
+const latest = dates[dates.length - 1];
+out = out.map((l) => (LAST.test(l) ? `| **Last updated** | ${latest} |` : l));
+
+if (conflicts.length) {
+  console.error("roadmap-merge: conflicts (resolve by hand, then re-run):\n" + conflicts.join("\n"));
+  process.exit(1);
+}
+const text = out.join("\n");
+if (write) writeFileSync(canonicalPath, text);
+else process.stdout.write(text);
