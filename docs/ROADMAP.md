@@ -4,7 +4,7 @@
 
 | | |
 |---|---|
-| **Last updated** | 2026-10-07 (SCF open-source readiness audit) |
+| **Last updated** | 2026-10-07 (W-02 seed issues) |
 | **Docs baseline** | v0.3, worldwide scope (`PRD.md`, `ARCHITECTURE.md`, `ARCHITECTURE_ESSENTIALS.md`, `AGENTS.md`, `CLAUDE.md`, `project_structure.md`) |
 | **Current phase** | Phase 0 (Foundations) → starting Phase 1 (M0 Validate) |
 | **Readiness** | See [§3](#3-progress-snapshot) |
@@ -137,9 +137,9 @@ Readiness % = `DONE ÷ (all rows − DEFERRED − DROPPED)`. Conditional rows (P
 | 7 Hardening | 26 | 0 | 0 | 26 | 0 | 0 | 0 | 0% |
 | 8 Launch | 8 | 0 | 0 | 8 | 0 | 0 | 0 | 0% |
 | 9 Conditional ramp | 9 | 0 | 0 | 0 | 0 | 9 | 0 | n/a |
-| 10 Wave + community | 9 | 2 | 1 | 6 | 0 | 0 | 0 | 22% |
+| 10 Wave + community | 9 | 3 | 1 | 5 | 0 | 0 | 0 | 33% |
 | 11 Deferred parking lot | 16 | 0 | 0 | 0 | 0 | 16 | 0 | n/a |
-| **All** | **200** | **34** | **14** | **127** | **0** | **25** | **0** | **19%** |
+| **All** | **200** | **35** | **14** | **126** | **0** | **25** | **0** | **20%** |
 
 ---
 
@@ -482,7 +482,7 @@ Resolve each with an ADR and link it here. Move resolved rows to the bottom with
 | ID | Task | Repo | Pri | Status | Depends on | Done when |
 |---|---|---|---|---|---|---|
 | W-01 | Prepare Wave applications per repo (description, README, issues), within program limits | org | P1 | IN PROGRESS | M0-10 | Applications submitted for the four active repos |
-| W-02 | Seed issues: tests and docs in contracts (security-aware), registry tooling, app UI, SDK, indexer fixtures | all | P1 | TODO | M1-01 | Backlog exists; security-sensitive issues excluded from open contribution |
+| W-02 | Seed issues: tests and docs in contracts (security-aware), registry tooling, app UI, SDK, indexer fixtures | all | P1 | DONE | M1-01 | Backlog exists; security-sensitive issues excluded from open contribution |
 | W-03 | Org and repo `CONTRIBUTING.md` including the roadmap rule | org | P0 | DONE | F-09 | Rule stated prominently |
 | W-04 | Contributor quick-start tested on a clean machine for each repo | all | P1 | TODO | M3-01 | New contributor runs tests in under 15 minutes |
 | W-05 | Issue sizing guide aligned with current program guidelines | org | P1 | TODO | M0-10 | Guide published |
@@ -524,6 +524,7 @@ Newest first. One entry per PR. Required for every contribution (see §2).
 
 | Date | PR / ref | Repo | Rows touched | Summary |
 |---|---|---|---|---|
+| 2026-10-07 | `chore/w02-seed-issues` | org | DONE: W-02 | Seeded 5 Wave-scoped issues from existing roadmap rows across all 4 active repos: `kinlock-app#15` (M3-17 accessibility), `kinlock-app#16` (M3-20 copy review), `kinlock-sdk#25` (M2-17 docs), `kinlock-registry#7` (M1-26 attester checklist), `kinlock-contracts#17` (M1-21 threat-model docs, docs-only). All drawn from `project_structure.md` §8's "safe for broad contribution" list; none touch fund logic, auth, or claim-link-fragment code. Unblocked by `kinlock-contracts` closing `M1-01` this same pass |
 | 2026-10-07 | `docs/scf-readiness` | org | DONE: W-09 (new row). IN PROGRESS: M0-14 | Audited Kinlock against the official SCF Build Award handbook (license, contributor/community guidelines, roadmap-deliverable clarity, technical-integration brief, differentiation). Fixed the unfilled `Copyright [yyyy] [name of copyright owner]` placeholder in every repo's `LICENSE` (→ "Kinlock Contributors," pending `DEC-13`) and added `ISSUE_TEMPLATE/config.yml` (GitHub's community-profile check was reporting `issue_template: false` despite the templates existing). Found `CODEOWNERS` is non-functional — it references `F-12` teams that don't exist yet. Could not verify "BarakahPay" as a real product via web search; found real comparables (RemitaPay, Circle Arc "Remit") instead. Full findings and "needs a human" list in `docs/scf-readiness.md` |
 | 2026-10-07 | `docs/m0-10-wave-rules` | org | DONE: M0-10. IN PROGRESS: W-01 | Added `docs/research/m0-10-wave-rules.md`: Drips Stellar Wave mechanics (issue sizing tiers, per-user/per-org repo-application limits that reset each cycle, KYC required to submit an application and to withdraw rewards), sourced from official docs. Confirms the existing plan to apply only the four active repos; flags KYC as a blocking prerequisite for a human to complete before `W-01` can reach `DONE`. One `wave` label created on `kinlock-contracts` toward `F-13`; the full label rollout across all four repos is prepared as a script for the maintainer to run (bulk label writes across repos were blocked for the agent) |
 | 2026-10-07 | `docs/m0-interview-materials` | org | IN PROGRESS: M0-01, M0-02, M0-03 | Added `docs/research/` with a sender interview script + note template (M0-01), payee interview script + note template (M0-02), and an attester conversation guide (M0-03), each mapped to `PRD.md` §8.2 pivot triggers and §10 assumptions, with log tables for findings. Scripts/templates only — no real interviews conducted yet, so rows stay `IN PROGRESS` pending actual notes and the themes summary |
