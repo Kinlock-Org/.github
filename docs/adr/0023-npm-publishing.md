@@ -1,5 +1,5 @@
 # 0023 — Publish TypeScript packages to npm under @kinlock
-Status: Accepted
+Status: Superseded by ADR-0026 (2026-10-07)
 Date: 2026-10-06
 ## Context
 The SDK and app need the contract's generated TypeScript bindings, and integrators need the SDK (DEC-03, roadmap F-11, M1-18). Options were public npm, GitHub Packages (which needs a token even to install public packages), or not publishing yet.
