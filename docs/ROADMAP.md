@@ -4,7 +4,7 @@
 
 | | |
 |---|---|
-| **Last updated** | 2026-10-07 (M0 interview materials) |
+| **Last updated** | 2026-10-07 (M0-10 Drips Wave rules review) |
 | **Docs baseline** | v0.3, worldwide scope (`PRD.md`, `ARCHITECTURE.md`, `ARCHITECTURE_ESSENTIALS.md`, `AGENTS.md`, `CLAUDE.md`, `project_structure.md`) |
 | **Current phase** | Phase 0 (Foundations) → starting Phase 1 (M0 Validate) |
 | **Readiness** | See [§3](#3-progress-snapshot) |
@@ -128,7 +128,7 @@ Readiness % = `DONE ÷ (all rows − DEFERRED − DROPPED)`. Conditional rows (P
 | Phase | Total | DONE | IN PROGRESS | TODO | BLOCKED | DEFERRED | DROPPED | Readiness |
 |---|---|---|---|---|---|---|---|---|
 | 0 Foundations | 19 | 13 | 1 | 5 | 0 | 0 | 0 | 68% |
-| 1 M0 Validate | 17 | 0 | 4 | 13 | 0 | 0 | 0 | 0% |
+| 1 M0 Validate | 17 | 1 | 4 | 12 | 0 | 0 | 0 | 6% |
 | 2 Contract + registry | 36 | 16 | 5 | 15 | 0 | 0 | 0 | 44% |
 | 3 SDK + indexer | 19 | 1 | 1 | 17 | 0 | 0 | 0 | 5% |
 | 4 App | 24 | 1 | 1 | 22 | 0 | 0 | 0 | 4% |
@@ -137,9 +137,9 @@ Readiness % = `DONE ÷ (all rows − DEFERRED − DROPPED)`. Conditional rows (P
 | 7 Hardening | 26 | 0 | 0 | 26 | 0 | 0 | 0 | 0% |
 | 8 Launch | 8 | 0 | 0 | 8 | 0 | 0 | 0 | 0% |
 | 9 Conditional ramp | 9 | 0 | 0 | 0 | 0 | 9 | 0 | n/a |
-| 10 Wave + community | 8 | 1 | 0 | 7 | 0 | 0 | 0 | 13% |
+| 10 Wave + community | 8 | 1 | 1 | 6 | 0 | 0 | 0 | 13% |
 | 11 Deferred parking lot | 16 | 0 | 0 | 0 | 0 | 16 | 0 | n/a |
-| **All** | **199** | **32** | **12** | **130** | **0** | **25** | **0** | **18%** |
+| **All** | **199** | **33** | **13** | **128** | **0** | **25** | **0** | **19%** |
 
 ---
 
@@ -189,7 +189,7 @@ Readiness % = `DONE ÷ (all rows − DEFERRED − DROPPED)`. Conditional rows (P
 | M0-07 | Counsel intro call; written scoping of legal questions **per candidate market** (stablecoin acceptance by domestic payees, money transmission, sanctions and restricted jurisdictions, data protection including where senders live, terms) | org | P0 | TODO | — | Counsel engaged; question list and timeline agreed |
 | M0-08 | Verify network facts: max entry TTL, RPC event retention, SAC/trustline failure behavior, USDC issuer flags (freeze, authorization, clawback) | contracts | P0 | IN PROGRESS | — | Findings written; `MAX_LOCK_DURATION` confirmed or changed via ADR |
 | M0-09 | Research archive/backfill options for receipt verification (tier 3) and indexer gap recovery | sdk | P0 | TODO | M0-08 | Option chosen and costed; ADR drafted |
-| M0-10 | Review Drips Wave rules: application limits, KYC, issue-sizing guidelines | org | P1 | TODO | — | Short note; Wave plan (`W-01`) adjusted |
+| M0-10 | Review Drips Wave rules: application limits, KYC, issue-sizing guidelines | org | P1 | DONE | — | Short note; Wave plan (`W-01`) adjusted |
 | M0-11 | Write M0 findings report and go / pivot / stop decision against `PRD.md` §8.2 | org | P0 | TODO | M0-01..M0-09 | Report committed; decision recorded in §10 |
 | M0-12 | Revise PRD, architecture, essentials, and this roadmap per findings | org | P0 | TODO | M0-11 | Docs updated; changed rows noted in Changelog |
 | M0-13 | Set sender all-in cost target and pilot metric thresholds | org | P0 | TODO | M0-04 | Numbers recorded in PRD §8.1 |
@@ -481,7 +481,7 @@ Resolve each with an ADR and link it here. Move resolved rows to the bottom with
 
 | ID | Task | Repo | Pri | Status | Depends on | Done when |
 |---|---|---|---|---|---|---|
-| W-01 | Prepare Wave applications per repo (description, README, issues), within program limits | org | P1 | TODO | M0-10 | Applications submitted for the four active repos |
+| W-01 | Prepare Wave applications per repo (description, README, issues), within program limits | org | P1 | IN PROGRESS | M0-10 | Applications submitted for the four active repos |
 | W-02 | Seed issues: tests and docs in contracts (security-aware), registry tooling, app UI, SDK, indexer fixtures | all | P1 | TODO | M1-01 | Backlog exists; security-sensitive issues excluded from open contribution |
 | W-03 | Org and repo `CONTRIBUTING.md` including the roadmap rule | org | P0 | DONE | F-09 | Rule stated prominently |
 | W-04 | Contributor quick-start tested on a clean machine for each repo | all | P1 | TODO | M3-01 | New contributor runs tests in under 15 minutes |
@@ -523,6 +523,7 @@ Newest first. One entry per PR. Required for every contribution (see §2).
 
 | Date | PR / ref | Repo | Rows touched | Summary |
 |---|---|---|---|---|
+| 2026-10-07 | `docs/m0-10-wave-rules` | org | DONE: M0-10. IN PROGRESS: W-01 | Added `docs/research/m0-10-wave-rules.md`: Drips Stellar Wave mechanics (issue sizing tiers, per-user/per-org repo-application limits that reset each cycle, KYC required to submit an application and to withdraw rewards), sourced from official docs. Confirms the existing plan to apply only the four active repos; flags KYC as a blocking prerequisite for a human to complete before `W-01` can reach `DONE`. One `wave` label created on `kinlock-contracts` toward `F-13`; the full label rollout across all four repos is prepared as a script for the maintainer to run (bulk label writes across repos were blocked for the agent) |
 | 2026-10-07 | `docs/m0-interview-materials` | org | IN PROGRESS: M0-01, M0-02, M0-03 | Added `docs/research/` with a sender interview script + note template (M0-01), payee interview script + note template (M0-02), and an attester conversation guide (M0-03), each mapped to `PRD.md` §8.2 pivot triggers and §10 assumptions, with log tables for findings. Scripts/templates only — no real interviews conducted yet, so rows stay `IN PROGRESS` pending actual notes and the themes summary |
 | 2026-10-07 | .github docs/adr-sdk-getpayee | org | no row changes | ADR-0030: SDK gains `getPayee` (chain read) so money pages apply the full refund rule; AGENTS.md §8.2 lists it |
 | 2026-10-07 | .github docs/adr-receipts | org | no row changes | ADR-0029: receipt verification tiers and results; indexer event lookup as a tier-2 aid |
