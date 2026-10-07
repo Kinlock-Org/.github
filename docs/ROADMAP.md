@@ -4,7 +4,7 @@
 
 | | |
 |---|---|
-| **Last updated** | 2026-10-07 (M0-10 Drips Wave rules review) |
+| **Last updated** | 2026-10-07 (SCF open-source readiness audit) |
 | **Docs baseline** | v0.3, worldwide scope (`PRD.md`, `ARCHITECTURE.md`, `ARCHITECTURE_ESSENTIALS.md`, `AGENTS.md`, `CLAUDE.md`, `project_structure.md`) |
 | **Current phase** | Phase 0 (Foundations) → starting Phase 1 (M0 Validate) |
 | **Readiness** | See [§3](#3-progress-snapshot) |
@@ -128,7 +128,7 @@ Readiness % = `DONE ÷ (all rows − DEFERRED − DROPPED)`. Conditional rows (P
 | Phase | Total | DONE | IN PROGRESS | TODO | BLOCKED | DEFERRED | DROPPED | Readiness |
 |---|---|---|---|---|---|---|---|---|
 | 0 Foundations | 19 | 13 | 1 | 5 | 0 | 0 | 0 | 68% |
-| 1 M0 Validate | 17 | 1 | 4 | 12 | 0 | 0 | 0 | 6% |
+| 1 M0 Validate | 17 | 1 | 5 | 11 | 0 | 0 | 0 | 6% |
 | 2 Contract + registry | 36 | 16 | 5 | 15 | 0 | 0 | 0 | 44% |
 | 3 SDK + indexer | 19 | 1 | 1 | 17 | 0 | 0 | 0 | 5% |
 | 4 App | 24 | 1 | 1 | 22 | 0 | 0 | 0 | 4% |
@@ -137,9 +137,9 @@ Readiness % = `DONE ÷ (all rows − DEFERRED − DROPPED)`. Conditional rows (P
 | 7 Hardening | 26 | 0 | 0 | 26 | 0 | 0 | 0 | 0% |
 | 8 Launch | 8 | 0 | 0 | 8 | 0 | 0 | 0 | 0% |
 | 9 Conditional ramp | 9 | 0 | 0 | 0 | 0 | 9 | 0 | n/a |
-| 10 Wave + community | 8 | 1 | 1 | 6 | 0 | 0 | 0 | 13% |
+| 10 Wave + community | 9 | 2 | 1 | 6 | 0 | 0 | 0 | 22% |
 | 11 Deferred parking lot | 16 | 0 | 0 | 0 | 0 | 16 | 0 | n/a |
-| **All** | **199** | **33** | **13** | **128** | **0** | **25** | **0** | **19%** |
+| **All** | **200** | **34** | **14** | **127** | **0** | **25** | **0** | **19%** |
 
 ---
 
@@ -193,7 +193,7 @@ Readiness % = `DONE ÷ (all rows − DEFERRED − DROPPED)`. Conditional rows (P
 | M0-11 | Write M0 findings report and go / pivot / stop decision against `PRD.md` §8.2 | org | P0 | TODO | M0-01..M0-09 | Report committed; decision recorded in §10 |
 | M0-12 | Revise PRD, architecture, essentials, and this roadmap per findings | org | P0 | TODO | M0-11 | Docs updated; changed rows noted in Changelog |
 | M0-13 | Set sender all-in cost target and pilot metric thresholds | org | P0 | TODO | M0-04 | Numbers recorded in PRD §8.1 |
-| M0-14 | Competitive note: BarakahPay and other purpose-bound remittance projects | org | P1 | TODO | — | One-page comparison; differentiation confirmed or revised |
+| M0-14 | Competitive note: BarakahPay and other purpose-bound remittance projects | org | P1 | IN PROGRESS | — | One-page comparison; differentiation confirmed or revised |
 | M0-15 | Decide a sustainability/revenue approach (grants, referral, B2B SDK, fee later) | org | P1 | TODO | M0-11 | ADR or PRD §13 answer recorded |
 | M0-16 | Choose pilot market(s) and write market-selection criteria (legal feasibility, attester supply, cash-out route, rate source, sender demand). Candidate: Nigeria plus at least one market in a different region and currency | org | P0 | TODO | M0-01, M0-02, M0-03 | Markets chosen and recorded (`DEC-19`) |
 | M0-17 | Define the supported-countries policy and restricted-jurisdiction approach with counsel (who decides, criteria, how the list changes) | org | P0 | TODO | M0-07 | Policy written; `DEC-20` resolved |
@@ -489,6 +489,7 @@ Resolve each with an ADR and link it here. Move resolved rows to the bottom with
 | W-06 | PR review SLAs and triage routine | org | P1 | TODO | F-12 | Documented; rota exists |
 | W-07 | Maintainer rota for `security-sensitive` PRs | org | P1 | TODO | F-12 | Named reviewers per week |
 | W-08 | Track application limits and KYC requirements per cycle | org | P2 | TODO | W-01 | Calendar and owner set |
+| W-09 | SCF / open-source readiness audit against the official SCF Build Award handbook: license, contributor/community guidelines, roadmap-deliverable clarity (tranche-mapped), technical-integration brief | org | P1 | DONE | — | `docs/scf-readiness.md` published; `LICENSE` copyright line and `ISSUE_TEMPLATE/config.yml` gaps fixed and verified via the GitHub community-profile API |
 
 ---
 
@@ -523,6 +524,7 @@ Newest first. One entry per PR. Required for every contribution (see §2).
 
 | Date | PR / ref | Repo | Rows touched | Summary |
 |---|---|---|---|---|
+| 2026-10-07 | `docs/scf-readiness` | org | DONE: W-09 (new row). IN PROGRESS: M0-14 | Audited Kinlock against the official SCF Build Award handbook (license, contributor/community guidelines, roadmap-deliverable clarity, technical-integration brief, differentiation). Fixed the unfilled `Copyright [yyyy] [name of copyright owner]` placeholder in every repo's `LICENSE` (→ "Kinlock Contributors," pending `DEC-13`) and added `ISSUE_TEMPLATE/config.yml` (GitHub's community-profile check was reporting `issue_template: false` despite the templates existing). Found `CODEOWNERS` is non-functional — it references `F-12` teams that don't exist yet. Could not verify "BarakahPay" as a real product via web search; found real comparables (RemitaPay, Circle Arc "Remit") instead. Full findings and "needs a human" list in `docs/scf-readiness.md` |
 | 2026-10-07 | `docs/m0-10-wave-rules` | org | DONE: M0-10. IN PROGRESS: W-01 | Added `docs/research/m0-10-wave-rules.md`: Drips Stellar Wave mechanics (issue sizing tiers, per-user/per-org repo-application limits that reset each cycle, KYC required to submit an application and to withdraw rewards), sourced from official docs. Confirms the existing plan to apply only the four active repos; flags KYC as a blocking prerequisite for a human to complete before `W-01` can reach `DONE`. One `wave` label created on `kinlock-contracts` toward `F-13`; the full label rollout across all four repos is prepared as a script for the maintainer to run (bulk label writes across repos were blocked for the agent) |
 | 2026-10-07 | `docs/m0-interview-materials` | org | IN PROGRESS: M0-01, M0-02, M0-03 | Added `docs/research/` with a sender interview script + note template (M0-01), payee interview script + note template (M0-02), and an attester conversation guide (M0-03), each mapped to `PRD.md` §8.2 pivot triggers and §10 assumptions, with log tables for findings. Scripts/templates only — no real interviews conducted yet, so rows stay `IN PROGRESS` pending actual notes and the themes summary |
 | 2026-10-07 | .github docs/adr-sdk-getpayee | org | no row changes | ADR-0030: SDK gains `getPayee` (chain read) so money pages apply the full refund rule; AGENTS.md §8.2 lists it |
