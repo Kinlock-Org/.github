@@ -523,6 +523,7 @@ Newest first. One entry per PR. Required for every contribution (see §2).
 
 | Date | PR / ref | Repo | Rows touched | Summary |
 |---|---|---|---|---|
+| 2026-10-07 | .github docs/adr-receipts | org | no row changes | ADR-0029: receipt verification tiers and results; indexer event lookup as a tier-2 aid |
 | 2026-10-07 | .github docs/adr-sdk-preflight | org | no row changes | ADR-0028: SDK preflight results (pass/fail/unknown with block/warn severity), optional `indexerUrl` for the two indexer-backed warnings |
 | 2026-10-07 | .github docs/adr-sdk-client | org | no row changes | ADR-0027: SDK contract functions take a config first and a wallet signer last; new types `KinlockConfig`, `Signer`; error codes `INVALID_INPUT`, `CONTRACT_ERROR`, `TX_FAILED` |
 | 2026-10-07 | .github docs/reword-f11 | org | F-11 DONE (reworded, owner-approved) | F-11 reworded from npm to "package names and distribution"; done: `@kinlock/contract` 0.1.0 and `@kinlock/sdk` 0.1.0 released as GitHub Release tarballs and installed from their URLs. ADR-0026 corrected: pnpm lockfiles do not record an integrity hash for URL tarballs |
