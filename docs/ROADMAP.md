@@ -523,6 +523,7 @@ Newest first. One entry per PR. Required for every contribution (see §2).
 
 | Date | PR / ref | Repo | Rows touched | Summary |
 |---|---|---|---|---|
+| 2026-10-07 | .github docs/adr-sdk-getpayee | org | no row changes | ADR-0030: SDK gains `getPayee` (chain read) so money pages apply the full refund rule; AGENTS.md §8.2 lists it |
 | 2026-10-07 | .github docs/adr-receipts | org | no row changes | ADR-0029: receipt verification tiers and results; indexer event lookup as a tier-2 aid |
 | 2026-10-07 | .github docs/adr-sdk-preflight | org | no row changes | ADR-0028: SDK preflight results (pass/fail/unknown with block/warn severity), optional `indexerUrl` for the two indexer-backed warnings |
 | 2026-10-07 | .github docs/adr-sdk-client | org | no row changes | ADR-0027: SDK contract functions take a config first and a wallet signer last; new types `KinlockConfig`, `Signer`; error codes `INVALID_INPUT`, `CONTRACT_ERROR`, `TX_FAILED` |
