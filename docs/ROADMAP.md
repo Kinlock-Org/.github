@@ -4,7 +4,7 @@
 
 | | |
 |---|---|
-| **Last updated** | 2026-10-07 |
+| **Last updated** | 2026-10-07 (M0 interview materials) |
 | **Docs baseline** | v0.3, worldwide scope (`PRD.md`, `ARCHITECTURE.md`, `ARCHITECTURE_ESSENTIALS.md`, `AGENTS.md`, `CLAUDE.md`, `project_structure.md`) |
 | **Current phase** | Phase 0 (Foundations) → starting Phase 1 (M0 Validate) |
 | **Readiness** | See [§3](#3-progress-snapshot) |
@@ -128,7 +128,7 @@ Readiness % = `DONE ÷ (all rows − DEFERRED − DROPPED)`. Conditional rows (P
 | Phase | Total | DONE | IN PROGRESS | TODO | BLOCKED | DEFERRED | DROPPED | Readiness |
 |---|---|---|---|---|---|---|---|---|
 | 0 Foundations | 19 | 13 | 1 | 5 | 0 | 0 | 0 | 68% |
-| 1 M0 Validate | 17 | 0 | 1 | 16 | 0 | 0 | 0 | 0% |
+| 1 M0 Validate | 17 | 0 | 4 | 13 | 0 | 0 | 0 | 0% |
 | 2 Contract + registry | 36 | 16 | 5 | 15 | 0 | 0 | 0 | 44% |
 | 3 SDK + indexer | 19 | 1 | 1 | 17 | 0 | 0 | 0 | 5% |
 | 4 App | 24 | 1 | 1 | 22 | 0 | 0 | 0 | 4% |
@@ -139,7 +139,7 @@ Readiness % = `DONE ÷ (all rows − DEFERRED − DROPPED)`. Conditional rows (P
 | 9 Conditional ramp | 9 | 0 | 0 | 0 | 0 | 9 | 0 | n/a |
 | 10 Wave + community | 8 | 1 | 0 | 7 | 0 | 0 | 0 | 13% |
 | 11 Deferred parking lot | 16 | 0 | 0 | 0 | 0 | 16 | 0 | n/a |
-| **All** | **199** | **32** | **9** | **133** | **0** | **25** | **0** | **18%** |
+| **All** | **199** | **32** | **12** | **130** | **0** | **25** | **0** | **18%** |
 
 ---
 
@@ -180,9 +180,9 @@ Readiness % = `DONE ÷ (all rows − DEFERRED − DROPPED)`. Conditional rows (P
 
 | ID | Task | Repo | Pri | Status | Depends on | Done when |
 |---|---|---|---|---|---|---|
-| M0-01 | Interview 15 senders across at least 2 candidate markets (script + note template) | org | P0 | TODO | F-08 | Notes stored; themes summarized; willingness to use USDC recorded |
-| M0-02 | Interview 5 payees (schools, landlords) in candidate markets, incl. willingness to operate a wallet | org | P0 | TODO | F-08 | At least 3 of 5 answers recorded against the §8.2 trigger |
-| M0-03 | Talk to at least 2 attesters (associations, NGOs) about accountability and process | org | P0 | TODO | F-08 | Named willing attesters or a documented "no" |
+| M0-01 | Interview 15 senders across at least 2 candidate markets (script + note template) | org | P0 | IN PROGRESS | F-08 | Notes stored; themes summarized; willingness to use USDC recorded |
+| M0-02 | Interview 5 payees (schools, landlords) in candidate markets, incl. willingness to operate a wallet | org | P0 | IN PROGRESS | F-08 | At least 3 of 5 answers recorded against the §8.2 trigger |
+| M0-03 | Talk to at least 2 attesters (associations, NGOs) about accountability and process | org | P0 | IN PROGRESS | F-08 | Named willing attesters or a documented "no" |
 | M0-04 | Build sender all-in cost model vs incumbent routes | org | P0 | TODO | M0-01 | Spreadsheet with fees at each hop; target cost set (`M0-13`) |
 | M0-05 | Off-ramp spike **per candidate market**: identify local-currency anchors and wallet routes (or whether payees can simply hold USDC); test SEP-1/10/24 on testnet; record assets, minimums, fees | org | P0 | TODO | — | Table of viable routes or a documented "none" |
 | M0-06 | Payee usability test: onboard 3–5 payees on testnet using the attester checklist | org | P0 | TODO | M0-02 | Task completion rates and pain points recorded |
@@ -523,6 +523,7 @@ Newest first. One entry per PR. Required for every contribution (see §2).
 
 | Date | PR / ref | Repo | Rows touched | Summary |
 |---|---|---|---|---|
+| 2026-10-07 | `docs/m0-interview-materials` | org | IN PROGRESS: M0-01, M0-02, M0-03 | Added `docs/research/` with a sender interview script + note template (M0-01), payee interview script + note template (M0-02), and an attester conversation guide (M0-03), each mapped to `PRD.md` §8.2 pivot triggers and §10 assumptions, with log tables for findings. Scripts/templates only — no real interviews conducted yet, so rows stay `IN PROGRESS` pending actual notes and the themes summary |
 | 2026-10-07 | .github docs/adr-sdk-getpayee | org | no row changes | ADR-0030: SDK gains `getPayee` (chain read) so money pages apply the full refund rule; AGENTS.md §8.2 lists it |
 | 2026-10-07 | .github docs/adr-receipts | org | no row changes | ADR-0029: receipt verification tiers and results; indexer event lookup as a tier-2 aid |
 | 2026-10-07 | .github docs/adr-sdk-preflight | org | no row changes | ADR-0028: SDK preflight results (pass/fail/unknown with block/warn severity), optional `indexerUrl` for the two indexer-backed warnings |
