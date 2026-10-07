@@ -127,7 +127,7 @@ Readiness % = `DONE ÷ (all rows − DEFERRED − DROPPED)`. Conditional rows (P
 
 | Phase | Total | DONE | IN PROGRESS | TODO | BLOCKED | DEFERRED | DROPPED | Readiness |
 |---|---|---|---|---|---|---|---|---|
-| 0 Foundations | 19 | 12 | 2 | 5 | 0 | 0 | 0 | 63% |
+| 0 Foundations | 19 | 13 | 1 | 5 | 0 | 0 | 0 | 68% |
 | 1 M0 Validate | 17 | 0 | 1 | 16 | 0 | 0 | 0 | 0% |
 | 2 Contract + registry | 36 | 16 | 5 | 15 | 0 | 0 | 0 | 44% |
 | 3 SDK + indexer | 19 | 1 | 1 | 17 | 0 | 0 | 0 | 5% |
@@ -139,7 +139,7 @@ Readiness % = `DONE ÷ (all rows − DEFERRED − DROPPED)`. Conditional rows (P
 | 9 Conditional ramp | 9 | 0 | 0 | 0 | 0 | 9 | 0 | n/a |
 | 10 Wave + community | 8 | 1 | 0 | 7 | 0 | 0 | 0 | 13% |
 | 11 Deferred parking lot | 16 | 0 | 0 | 0 | 0 | 16 | 0 | n/a |
-| **All** | **199** | **31** | **10** | **133** | **0** | **25** | **0** | **18%** |
+| **All** | **199** | **32** | **9** | **133** | **0** | **25** | **0** | **18%** |
 
 ---
 
@@ -160,7 +160,7 @@ Readiness % = `DONE ÷ (all rows − DEFERRED − DROPPED)`. Conditional rows (P
 | F-08 | Confirm org name availability and create the GitHub org (`kinlock` or backup) | org | P0 | DONE | — | Org exists; owners set |
 | F-09 | Create org `.github` repo: profile README, CoC, CONTRIBUTING, SECURITY, SUPPORT, canonical `docs/`, `templates/` | org | P0 | IN PROGRESS | F-08 | Repo public; docs and templates committed |
 | F-10 | Decide license (org-wide) | org | P0 | DONE | F-08 | ADR written; `LICENSE` template ready |
-| F-11 | Decide npm scope and publish rights | org | P0 | IN PROGRESS | F-08 | Scope reserved; publish tokens/process documented |
+| F-11 | Decide package names and distribution | org | P0 | DONE | F-08 | Package names chosen; release process documented and a release installs (ADR-0026) |
 | F-12 | Create GitHub teams: maintainers, contract-reviewers, attesters | org | P0 | TODO | F-08 | Teams exist; handles match `CODEOWNERS` |
 | F-13 | Create label set across repos (`security-sensitive`, `good first issue`, `wave`, `area:*`, `blocked:m0`, `deferred`) | org | P0 | TODO | F-08 | Labels applied via script |
 | F-14 | Write `scripts/sync-docs` and the `docs-in-sync` CI job | org | P0 | DONE | F-09 | CI fails when a vendored copy drifts |
@@ -523,6 +523,7 @@ Newest first. One entry per PR. Required for every contribution (see §2).
 
 | Date | PR / ref | Repo | Rows touched | Summary |
 |---|---|---|---|---|
+| 2026-10-07 | .github docs/reword-f11 | org | F-11 DONE (reworded, owner-approved) | F-11 reworded from npm to "package names and distribution"; done: `@kinlock/contract` 0.1.0 and `@kinlock/sdk` 0.1.0 released as GitHub Release tarballs and installed from their URLs. ADR-0026 corrected: pnpm lockfiles do not record an integrity hash for URL tarballs |
 | 2026-10-07 | .github docs/adr-github-release-packages | org | DEC-03 amended | ADR-0026: distribute `@kinlock/contract` and `@kinlock/sdk` as GitHub Release tarballs (no npm account or token); supersedes ADR-0023 |
 | 2026-10-06 | `docs/sdk-public-api` | org | no row changes | ADR-0025: SDK public API gains amount conversion, reference hashing, and request-link helpers (owner-approved); AGENTS.md §8.2 updated |
 | 2026-10-06 | `docs/adr-ref-hash` | org | no row changes | ADR-0024: exact reference-hash and claim-link format (16-byte base64url salt; SHA-256 of NFC-trimmed UTF-8 reference followed by salt bytes; fragment-only claim links), as implemented in kinlock-sdk |
