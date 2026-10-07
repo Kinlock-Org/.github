@@ -523,6 +523,7 @@ Newest first. One entry per PR. Required for every contribution (see §2).
 
 | Date | PR / ref | Repo | Rows touched | Summary |
 |---|---|---|---|---|
+| 2026-10-07 | .github docs/adr-sdk-client | org | no row changes | ADR-0027: SDK contract functions take a config first and a wallet signer last; new types `KinlockConfig`, `Signer`; error codes `INVALID_INPUT`, `CONTRACT_ERROR`, `TX_FAILED` |
 | 2026-10-07 | .github docs/reword-f11 | org | F-11 DONE (reworded, owner-approved) | F-11 reworded from npm to "package names and distribution"; done: `@kinlock/contract` 0.1.0 and `@kinlock/sdk` 0.1.0 released as GitHub Release tarballs and installed from their URLs. ADR-0026 corrected: pnpm lockfiles do not record an integrity hash for URL tarballs |
 | 2026-10-07 | .github docs/adr-github-release-packages | org | DEC-03 amended | ADR-0026: distribute `@kinlock/contract` and `@kinlock/sdk` as GitHub Release tarballs (no npm account or token); supersedes ADR-0023 |
 | 2026-10-06 | `docs/sdk-public-api` | org | no row changes | ADR-0025: SDK public API gains amount conversion, reference hashing, and request-link helpers (owner-approved); AGENTS.md §8.2 updated |
