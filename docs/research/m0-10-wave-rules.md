@@ -32,3 +32,30 @@ Kinlock is Stellar/Soroban-based, so the relevant program is the **Stellar Wave*
 - [Drips Wave docs — Withdrawing Your Rewards](https://docs.drips.network/wave/withdrawing-rewards/)
 - [Drips blog — Creating meaningful issues](https://www.drips.network/blog/posts/creating-meaningful-issues)
 - [Drips — Stellar Wave program page](https://www.drips.network/wave/stellar)
+
+## Applied — 2026-10-08 seeding (`W-02`, `W-05`)
+
+Note 3 (tier issues up front) and note 5 (stay inside the safe list) were applied as written. Tier
+definitions, the exclusion list and triage SLAs are now `docs/wave-issue-format.md`; the issue body
+format is `ISSUE_TEMPLATE/wave-task.md`. Seventeen issues were seeded, all in the §8 safe categories,
+each mapped to at least one roadmap row. No issue touches contract `src/**`, the SDK's link/hash/
+receipt/preflight modules, indexer `ingest/**` or migrations, `app/claim/**`, `lib/claim-links/**`,
+CI workflows, registry data approvals, or `kinlock-ramp`.
+
+| Repo | Issues | Tiers |
+|---|---|---|
+| `kinlock-contracts` | #27 invariants 5/6/8 harness · #28 integration suite · #29 error and event reference · #30 three doc/code contradictions | high, high, medium, trivial |
+| `kinlock-sdk` | #34 mixed `schema_version` fixtures · #35 list API reference + parity test · #36 amount precision boundary · #37 README verified on a clean machine | medium, medium, medium, trivial |
+| `kinlock-app` | #37 route loading/error/404 states · #38 contrast tokens · #39 skip link and focus · #40 shared money/time components · #41 first-load JS · #42 `/attester` read-only checks | trivial, trivial, medium, medium, medium, high |
+| `kinlock-registry` | #15 validator boundary fixtures · #16 aggregate validation report · #17 attester guide | medium, medium, trivial |
+
+New rows created for work the backlog surfaced: `M1-38`, `M1-39`, `M1-40`, `M1-41`, `M2-20`, `M2-21`,
+`M3-27`. Two seeded issues carry a dependency caveat recorded on the issue itself rather than being
+withheld: app #42 (`M3-12` depends on `M1-26`, still `IN PROGRESS`) and sdk #34 (`M2-10`/`M2-14` both
+`IN PROGRESS` — the issue is the remaining half).
+
+Still open per note 4 and note 2: **re-check the live per-user and per-org limits and cycle budget on
+`drips.network/wave/stellar` immediately before applying**, and complete KYC for the human submitting
+on the org's behalf. `W-08` tracks the per-cycle numbers; `W-01` stays `IN PROGRESS` until the four
+repo applications are submitted.
+
