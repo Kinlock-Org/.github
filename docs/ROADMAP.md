@@ -4,7 +4,7 @@
 
 | | |
 |---|---|
-| **Last updated** | 2026-10-07 (F-16 branch protection) |
+| **Last updated** | 2026-10-08 (F-13 done; M0-04 cost-model template) |
 | **Docs baseline** | v0.3, worldwide scope (`PRD.md`, `ARCHITECTURE.md`, `ARCHITECTURE_ESSENTIALS.md`, `AGENTS.md`, `CLAUDE.md`, `project_structure.md`) |
 | **Current phase** | Phase 0 (Foundations) → starting Phase 1 (M0 Validate) |
 | **Readiness** | See [§3](#3-progress-snapshot) |
@@ -127,8 +127,8 @@ Readiness % = `DONE ÷ (all rows − DEFERRED − DROPPED)`. Conditional rows (P
 
 | Phase | Total | DONE | IN PROGRESS | TODO | BLOCKED | DEFERRED | DROPPED | Readiness |
 |---|---|---|---|---|---|---|---|---|
-| 0 Foundations | 19 | 15 | 1 | 3 | 0 | 0 | 0 | 79% |
-| 1 M0 Validate | 17 | 1 | 5 | 11 | 0 | 0 | 0 | 6% |
+| 0 Foundations | 19 | 16 | 1 | 2 | 0 | 0 | 0 | 84% |
+| 1 M0 Validate | 17 | 1 | 6 | 10 | 0 | 0 | 0 | 6% |
 | 2 Contract + registry | 36 | 16 | 5 | 15 | 0 | 0 | 0 | 44% |
 | 3 SDK + indexer | 19 | 1 | 1 | 17 | 0 | 0 | 0 | 5% |
 | 4 App | 24 | 1 | 1 | 22 | 0 | 0 | 0 | 4% |
@@ -139,7 +139,7 @@ Readiness % = `DONE ÷ (all rows − DEFERRED − DROPPED)`. Conditional rows (P
 | 9 Conditional ramp | 9 | 0 | 0 | 0 | 0 | 9 | 0 | n/a |
 | 10 Wave + community | 9 | 3 | 1 | 5 | 0 | 0 | 0 | 33% |
 | 11 Deferred parking lot | 16 | 0 | 0 | 0 | 0 | 16 | 0 | n/a |
-| **All** | **200** | **37** | **14** | **124** | **0** | **25** | **0** | **21%** |
+| **All** | **200** | **38** | **15** | **122** | **0** | **25** | **0** | **22%** |
 
 ---
 
@@ -162,7 +162,7 @@ Readiness % = `DONE ÷ (all rows − DEFERRED − DROPPED)`. Conditional rows (P
 | F-10 | Decide license (org-wide) | org | P0 | DONE | F-08 | ADR written; `LICENSE` template ready |
 | F-11 | Decide package names and distribution | org | P0 | DONE | F-08 | Package names chosen; release process documented and a release installs (ADR-0026) |
 | F-12 | Create GitHub teams: maintainers, contract-reviewers, attesters | org | P0 | DONE | F-08 | Teams exist; handles match `CODEOWNERS` |
-| F-13 | Create label set across repos (`security-sensitive`, `good first issue`, `wave`, `area:*`, `blocked:m0`, `deferred`) | org | P0 | TODO | F-08 | Labels applied via script |
+| F-13 | Create label set across repos (`security-sensitive`, `good first issue`, `wave`, `area:*`, `blocked:m0`, `deferred`) | org | P0 | DONE | F-08 | Labels applied via script |
 | F-14 | Write `scripts/sync-docs` and the `docs-in-sync` CI job | org | P0 | DONE | F-09 | CI fails when a vendored copy drifts |
 | F-15 | Write `roadmap-check` CI job and `scripts/roadmap-progress` and `scripts/roadmap-merge` | org | P0 | DONE | F-09 | CI fails PRs without roadmap update; scripts produce correct counts and merges |
 | F-16 | Define branch protection and repo settings (required reviews, required checks, no force-push to `main`) | org | P0 | DONE | F-12 | Applied to all repos; documented |
@@ -183,7 +183,7 @@ Readiness % = `DONE ÷ (all rows − DEFERRED − DROPPED)`. Conditional rows (P
 | M0-01 | Interview 15 senders across at least 2 candidate markets (script + note template) | org | P0 | IN PROGRESS | F-08 | Notes stored; themes summarized; willingness to use USDC recorded |
 | M0-02 | Interview 5 payees (schools, landlords) in candidate markets, incl. willingness to operate a wallet | org | P0 | IN PROGRESS | F-08 | At least 3 of 5 answers recorded against the §8.2 trigger |
 | M0-03 | Talk to at least 2 attesters (associations, NGOs) about accountability and process | org | P0 | IN PROGRESS | F-08 | Named willing attesters or a documented "no" |
-| M0-04 | Build sender all-in cost model vs incumbent routes | org | P0 | TODO | M0-01 | Spreadsheet with fees at each hop; target cost set (`M0-13`) |
+| M0-04 | Build sender all-in cost model vs incumbent routes | org | P0 | IN PROGRESS | M0-01 | Spreadsheet with fees at each hop; target cost set (`M0-13`) |
 | M0-05 | Off-ramp spike **per candidate market**: identify local-currency anchors and wallet routes (or whether payees can simply hold USDC); test SEP-1/10/24 on testnet; record assets, minimums, fees | org | P0 | TODO | — | Table of viable routes or a documented "none" |
 | M0-06 | Payee usability test: onboard 3–5 payees on testnet using the attester checklist | org | P0 | TODO | M0-02 | Task completion rates and pain points recorded |
 | M0-07 | Counsel intro call; written scoping of legal questions **per candidate market** (stablecoin acceptance by domestic payees, money transmission, sanctions and restricted jurisdictions, data protection including where senders live, terms) | org | P0 | TODO | — | Counsel engaged; question list and timeline agreed |
@@ -524,6 +524,7 @@ Newest first. One entry per PR. Required for every contribution (see §2).
 
 | Date | PR / ref | Repo | Rows touched | Summary |
 |---|---|---|---|---|
+| 2026-10-08 | `docs/m0-04-cost-model-template` | org | DONE: F-13 (found undone from an earlier pass). IN PROGRESS: M0-04 | Rebuilt on current `main` after `chore/f12-f16-governance` (#18) merged, to avoid a `ROADMAP.md` conflict. Added `docs/research/m0-04-cost-model-template.md`: the hop-by-hop cost structure `M0-04` asks for, seeded with cited public benchmarks (World Bank Remittance Prices Worldwide global average 6.49%; USDC on/off-ramp fee ranges; Stellar's ~$0.0001 on-chain fee) — explicitly illustrative, not Kinlock-specific; real numbers still need `M0-01` and `M0-05`, neither run yet. `M0-13` stays `TODO`, still blocked on this. Also closed `F-13` (label set): labels were actually created and verified across all 4 active repos in an earlier session pass, but the row was never flipped from `TODO` |
 | 2026-10-07 | `chore/f16-branch-protection` | org | DONE: F-16 | Applied branch protection to `main` on all 5 repos: required status checks (repo-specific CI jobs, confirmed via recent PR check names so none are a path-filtered context that would never report), 1 required approving review + CODEOWNERS review, no force-push, no deletion. `.github` has no CI so only PR-required + no-force-push/delete there. This is a workflow change: merges now need an actual approval, not just green CI |
 | 2026-10-07 | `chore/f12-teams` | org | DONE: F-12 | Created `maintainers` (abrcrmb, YazarAyobami, maintain access on all 5 repos), `contract-reviewers` (abrcrmb, YazarAyobami, maintain access on kinlock-contracts/sdk/app), and `attesters` (empty, push access on kinlock-registry so its `payees/**` rule resolves). Verified: `GET /repos/{repo}/codeowners/errors` returns zero errors on all 4 active repos (previously all failed with "Unknown owner"). Unblocks `F-16` (branch protection), `W-06`, `W-07` |
 | 2026-10-07 | `chore/w02-seed-issues` | org | DONE: W-02 | Seeded 5 Wave-scoped issues from existing roadmap rows across all 4 active repos: `kinlock-app#15` (M3-17 accessibility), `kinlock-app#16` (M3-20 copy review), `kinlock-sdk#25` (M2-17 docs), `kinlock-registry#7` (M1-26 attester checklist), `kinlock-contracts#17` (M1-21 threat-model docs, docs-only). All drawn from `project_structure.md` §8's "safe for broad contribution" list; none touch fund logic, auth, or claim-link-fragment code. Unblocked by `kinlock-contracts` closing `M1-01` this same pass |

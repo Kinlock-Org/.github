@@ -1,6 +1,6 @@
 # M0 research materials
 
-Scripts and note templates for the Phase 1 (M0 Validate) interviews in `ROADMAP.md`: `M0-01` (senders), `M0-02` (payees), `M0-03` (attesters). These feed the go/pivot/stop decision (`M0-11`, `DEC-17`) against `PRD.md` §8.2 (pivot triggers) and §10 (assumptions to validate).
+Scripts, note templates, and research for Phase 1 (M0 Validate) rows in `ROADMAP.md`. These feed the go/pivot/stop decision (`M0-11`, `DEC-17`) against `PRD.md` §8.2 (pivot triggers) and §10 (assumptions to validate).
 
 ## Before you start
 
@@ -15,6 +15,8 @@ Scripts and note templates for the Phase 1 (M0 Validate) interviews in `ROADMAP.
 | `m0-01-sender-interviews.md` | `M0-01` | 15 senders, ≥ 2 candidate markets |
 | `m0-02-payee-interviews.md` | `M0-02` | 5 payees (schools/landlords), incl. wallet willingness |
 | `m0-03-attester-conversations.md` | `M0-03` | ≥ 2 attesters (associations, NGOs) |
+| `m0-04-cost-model-template.md` | `M0-04` | Hop-by-hop cost structure, seeded with cited public benchmarks; real numbers need `M0-01` + `M0-05` |
+| `m0-10-wave-rules.md` | `M0-10` | Drips Stellar Wave rules review (done) |
 
 ## After interviews are logged
 
