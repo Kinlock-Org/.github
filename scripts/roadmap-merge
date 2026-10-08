@@ -10,6 +10,11 @@
 // e.g. `git show <commit>:docs/ROADMAP.md`. It defaults to the canonical file itself, which is
 // only right if nothing edited the canonical copy since the last merge.
 //
+// After merging, copy the result back into each repo's ROADMAP.md so all copies are identical
+// again (that invariant is what makes --ancestor meaningful) — rewriting `](adr/` as `](docs/adr/`
+// for the repo-root location — then run scripts/roadmap-progress. Skipping the copy-back is how
+// the copies drifted to 92 divergent statuses between 2026-10-06 and 2026-10-08.
+//
 // Rules (AGENTS.md §12), a three-way merge against the ancestor:
 // - A row owned by a repo (its Repo column) is taken from that repo's copy.
 // - A cross-cutting row (org, all) or a decision row (DEC-…) is taken from whichever copy,
@@ -34,7 +39,10 @@ if (!canonicalPath || repoArgs.length === 0) {
 }
 
 const ROW = /^\| ((?:[A-Z]+\d*|DEC)-\d+) \|/;
-const read = (p) => readFileSync(p, "utf8").split("\n");
+// The copies sit at different depths: this one is docs/ROADMAP.md, each repo's is ROADMAP.md at the
+// repo root, so the same relative link is legitimately written two ways. Normalize on read so a
+// path difference is compared as equal instead of surfacing as a row conflict.
+const read = (p) => readFileSync(p, "utf8").replaceAll("](docs/adr/", "](adr/").split("\n");
 const rowId = (line) => line.match(ROW)?.[1] ?? null;
 const repoOf = (line) => line.split("|")[3]?.trim();
 
