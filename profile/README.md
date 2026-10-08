@@ -12,5 +12,6 @@ Worldwide by design, launched market by market. Testnet only until audit and leg
 | [`kinlock-registry`](https://github.com/Kinlock-Org/kinlock-registry) | Public payee data, schemas, hash-check CI |
 | [`kinlock-sdk`](https://github.com/Kinlock-Org/kinlock-sdk) | TypeScript SDK and the event indexer |
 | [`kinlock-app`](https://github.com/Kinlock-Org/kinlock-app) | Next.js web app |
+| [`Kinlock-Org.github.io`](https://github.com/Kinlock-Org/Kinlock-Org.github.io) | Hosted docs site, and where documentation issues across all repos get filed |
 
-Start with [`docs/ARCHITECTURE_ESSENTIALS.md`](../docs/ARCHITECTURE_ESSENTIALS.md). Status lives in [`docs/ROADMAP.md`](../docs/ROADMAP.md).
+Start with [`docs/ARCHITECTURE_ESSENTIALS.md`](../docs/ARCHITECTURE_ESSENTIALS.md). Status lives in [`docs/ROADMAP.md`](../docs/ROADMAP.md). Found a documentation gap anywhere in Kinlock? File it at [`Kinlock-Org.github.io`](https://github.com/Kinlock-Org/Kinlock-Org.github.io/issues/new/choose), not as a one-off issue in whichever repo you happened to be reading.
