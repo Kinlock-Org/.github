@@ -4,7 +4,7 @@
 
 | | |
 |---|---|
-| **Last updated** | 2026-10-08 (F-13 done; M0-04 cost-model template) |
+| **Last updated** | 2026-10-08 (W-10 hosted docs site) |
 | **Docs baseline** | v0.3, worldwide scope (`PRD.md`, `ARCHITECTURE.md`, `ARCHITECTURE_ESSENTIALS.md`, `AGENTS.md`, `CLAUDE.md`, `project_structure.md`) |
 | **Current phase** | Phase 0 (Foundations) → starting Phase 1 (M0 Validate) |
 | **Readiness** | See [§3](#3-progress-snapshot) |
@@ -137,9 +137,9 @@ Readiness % = `DONE ÷ (all rows − DEFERRED − DROPPED)`. Conditional rows (P
 | 7 Hardening | 26 | 0 | 0 | 26 | 0 | 0 | 0 | 0% |
 | 8 Launch | 8 | 0 | 0 | 8 | 0 | 0 | 0 | 0% |
 | 9 Conditional ramp | 9 | 0 | 0 | 0 | 0 | 9 | 0 | n/a |
-| 10 Wave + community | 9 | 3 | 1 | 5 | 0 | 0 | 0 | 33% |
+| 10 Wave + community | 10 | 4 | 1 | 5 | 0 | 0 | 0 | 40% |
 | 11 Deferred parking lot | 16 | 0 | 0 | 0 | 0 | 16 | 0 | n/a |
-| **All** | **200** | **38** | **15** | **122** | **0** | **25** | **0** | **22%** |
+| **All** | **201** | **39** | **15** | **122** | **0** | **25** | **0** | **22%** |
 
 ---
 
@@ -490,6 +490,7 @@ Resolve each with an ADR and link it here. Move resolved rows to the bottom with
 | W-07 | Maintainer rota for `security-sensitive` PRs | org | P1 | TODO | F-12 | Named reviewers per week |
 | W-08 | Track application limits and KYC requirements per cycle | org | P2 | TODO | W-01 | Calendar and owner set |
 | W-09 | SCF / open-source readiness audit against the official SCF Build Award handbook: license, contributor/community guidelines, roadmap-deliverable clarity (tranche-mapped), technical-integration brief | org | P1 | DONE | — | `docs/scf-readiness.md` published; `LICENSE` copyright line and `ISSUE_TEMPLATE/config.yml` gaps fixed and verified via the GitHub community-profile API |
+| W-10 | Hosted documentation site covering all 4 repos and how they fit together | org | P1 | DONE | — | `Kinlock-Org/Kinlock-Org.github.io` published via GitHub Pages at `kinlock-org.github.io`; landing page plus one section per repo; links out to the canonical docs rather than duplicating them; linked from the org profile and every repo's README |
 
 ---
 
@@ -524,6 +525,7 @@ Newest first. One entry per PR. Required for every contribution (see §2).
 
 | Date | PR / ref | Repo | Rows touched | Summary |
 |---|---|---|---|---|
+| 2026-10-08 | `docs/live-app-link` (org) + direct push to new repo `Kinlock-Org.github.io` | org | DONE: W-10 (new row) | Published a hosted documentation site at `kinlock-org.github.io` (plain static HTML/CSS, no framework, no build step): a landing page explaining how the 4 repos fit together, plus one section per repo summarizing real facts (entry points, invariants, public API, testnet contract ID, test counts) with links out to the canonical docs for full depth, not a duplicate copy. Linked from the org profile README and every repo's own README. Pushed directly to `main` (new, empty repo, nothing to review against yet) |
 | 2026-10-08 | `docs/m0-04-cost-model-template` | org | DONE: F-13 (found undone from an earlier pass). IN PROGRESS: M0-04 | Rebuilt on current `main` after `chore/f12-f16-governance` (#18) merged, to avoid a `ROADMAP.md` conflict. Added `docs/research/m0-04-cost-model-template.md`: the hop-by-hop cost structure `M0-04` asks for, seeded with cited public benchmarks (World Bank Remittance Prices Worldwide global average 6.49%; USDC on/off-ramp fee ranges; Stellar's ~$0.0001 on-chain fee) — explicitly illustrative, not Kinlock-specific; real numbers still need `M0-01` and `M0-05`, neither run yet. `M0-13` stays `TODO`, still blocked on this. Also closed `F-13` (label set): labels were actually created and verified across all 4 active repos in an earlier session pass, but the row was never flipped from `TODO` |
 | 2026-10-07 | `chore/f16-branch-protection` | org | DONE: F-16 | Applied branch protection to `main` on all 5 repos: required status checks (repo-specific CI jobs, confirmed via recent PR check names so none are a path-filtered context that would never report), 1 required approving review + CODEOWNERS review, no force-push, no deletion. `.github` has no CI so only PR-required + no-force-push/delete there. This is a workflow change: merges now need an actual approval, not just green CI |
 | 2026-10-07 | `chore/f12-teams` | org | DONE: F-12 | Created `maintainers` (abrcrmb, YazarAyobami, maintain access on all 5 repos), `contract-reviewers` (abrcrmb, YazarAyobami, maintain access on kinlock-contracts/sdk/app), and `attesters` (empty, push access on kinlock-registry so its `payees/**` rule resolves). Verified: `GET /repos/{repo}/codeowners/errors` returns zero errors on all 4 active repos (previously all failed with "Unknown owner"). Unblocks `F-16` (branch protection), `W-06`, `W-07` |
