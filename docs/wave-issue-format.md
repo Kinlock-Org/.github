@@ -42,7 +42,10 @@ this order. A missing section is returned, not merged — do not "improve" the s
 Three rules that make the format worth its cost:
 
 1. **Evidence over assertion.** Context lines cite files and line numbers a contributor can open. If a
-   claim cannot be cited, it goes in **Questions** as an open item, not in **Context** as fact.
+   claim cannot be cited, it goes in **Questions** as an open item, not in **Context** as fact. Every
+   rule reference must resolve: "`hard rule 5`", "`AGENTS.md` §8.3", "`docs/PRD.md:180`" — not a
+   subsection number that no document contains. A contributor who cannot open a citation has nothing
+   to check their work against, and a wrong citation costs more trust than a missing one.
 2. **One issue, one logical change.** A task that touches two purposes is two issues.
 3. **The review block is load-bearing.** It is the only place a contributor is told, before coding,
    that the docs outrank their initiative — which is what stops well-meaning agents "fixing" a
@@ -110,6 +113,11 @@ Before filing a batch:
    without asking: what exactly to do, what not to touch, where the traps are, what "done" means, which
    commands prove it, what the PR must contain, how it will be reviewed, and what it is worth. If any of
    those needs a question, the issue is not ready — fix it before publishing.
+6. Confirm the deliverable is not already in `main`. An issue that asks for something which exists is
+   answered by a PR that re-does it, and the reviewer has to reject work someone did for nothing. Check
+   the files and the scripts, then check the row's **Done when**: if only part of the row is left and the
+   rest needs a named human (`M1-26`'s end-to-end testnet run is the standing example), the row is not a
+   Wave issue — the contributable part gets its own issue and the human part stays on the roadmap.
 
 After filing:
 
@@ -124,6 +132,13 @@ After filing:
   it is not urgent, `help wanted` is removed rather than the issue being closed.
 - Anything that surfaces a fund-movement bug stops the queue: it becomes a `security-sensitive`
   maintainer issue immediately, and the contributor is credited in it.
+- An issue filed before this format existed is either **re-emitted in the format or closed with a
+  pointer** — never left sitting as an untiered umbrella. If its scope survives the checks above,
+  regenerate it through the same renderer the rest of the backlog uses. If it does not, close it with a
+  comment naming the successor issues, the roadmap row they serve, and what of that row is still
+  unowned. Closing an umbrella is not closing a row (`AGENTS.md` §12: rows are never deleted), and the
+  comment has to say so — a closed accessibility or attestation issue reads like abandoned work
+  whether or not that was the intent.
 
 ## Per-cycle reminders
 
