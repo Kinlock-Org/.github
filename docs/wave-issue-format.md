@@ -8,6 +8,13 @@ Kinlock issue uses, the tiers that map to Wave points, and who decides what.
 Canonical copy: `Kinlock-Org/.github/docs/wave-issue-format.md`. It is not synced into code repos;
 issues and templates reference it by URL.
 
+The format is checked against Drips' [guide for maintainers](https://www.drips.network/blog/posts/creating-meaningful-issues)
+— its five principles (real impact, clear context, scope that fits one cycle, direction without
+micromanagement, explicit expectations and complexity) map onto **Why we need this**, **Context**,
+**Done means** + **Tier and effort**, **Suggested implementation** + **Edge cases and traps**, and
+**How we review** + **Opening the pull request**. Re-read it each cycle: if the program's guidance moves,
+this document and every seeded issue move with it.
+
 ## The format
 
 Every Kinlock issue, however it is filed, uses `.github/ISSUE_TEMPLATE/wave-task.md`'s sections in
@@ -21,12 +28,14 @@ this order. A missing section is returned, not merged — do not "improve" the s
 | **Why we need this** | Which hard rule (§3), gate, pilot need or row **Done when** this serves. "Nicer" is not a reason. |
 | **Scope** | In scope, and **Do not touch** — the security-sensitive and generated paths from `docs/project_structure.md` §8. |
 | **Suggested implementation** | Numbered, step 1 is always what to read. Must say an alternative is welcome on the issue first. |
+| **Edge cases and traps** | The boundaries, failure modes and tempting shortcuts specific to this task — the things a contributor would otherwise have to ask about. |
 | **Done means** | Binary checkboxes a reviewer can verify by looking. |
 | **Tests** | What to add, what must stay untouched, and the no-weakening rule. |
 | **Documentation** | Which doc or ADR moves with the change, or "None" — and if behaviour changes, "None" is wrong. |
 | **Verify before you open the PR** | The commands, in the order that works on a clean machine. |
-| **Opening the pull request** | Branch and commit convention, the §12 roadmap requirement, the PR template, no drive-by reformatting. |
-| **Tier and effort** | One tier plus a rough estimate. |
+| **Opening the pull request** | Assignment required first, `Closes #<issue>`, the commit-subject example, the §12 roadmap requirement, the PR template, and the evidence the PR must carry. |
+| **How we review** | Who reviews, in what order, and what fails review fastest — plus the one thing to look at first for this issue. |
+| **Tier and effort** | One tier, a rough estimate for someone new to the codebase, and its Wave point value. |
 | **Related roadmap rows** | At least one row ID. Never "none". |
 | **Questions** | Answer time and the claim protocol. |
 
@@ -44,16 +53,24 @@ Three rules that make the format worth its cost:
 Tier is set when the issue is filed and drives Wave point value, so it must be defensible. Estimate
 for a competent contributor who has **not** seen this codebase before.
 
-| Tier | Shape of the work | Rough effort | Wave |
+| Tier | Shape of the work | Rough effort | Wave complexity · points |
 |---|---|---|---|
-| `tier/trivial` | Self-contained, one or two adjacent files, no design choice left open. Docs fixes, copy, a small state component, a stale count. | under ~2 hours | Trivial |
-| `tier/medium` | Standard feature or fix inside existing patterns. Several files, judgement required, tests included. One architectural assumption at most. | ~1–3 days | Medium |
-| `tier/high` | Multi-file with real design judgement, unfamiliar toolchain, or a cross-repo parity requirement. Must be claimed before starting. | 3–5 days | High |
+| `tier/trivial` | Self-contained, one or two adjacent files, no design choice left open. Docs fixes, copy, a small state component, a stale count. | under ~2 hours | Trivial · 100 |
+| `tier/medium` | Standard feature or fix inside existing patterns. Several files, judgement required, tests included. One architectural assumption at most. | ~1–3 days | Medium · 150 |
+| `tier/high` | Multi-file with real design judgement, unfamiliar toolchain, or a cross-repo parity requirement. Must be claimed before starting. | 3–5 days | High · 200 |
+
+Points are the published mapping in Drips' [guide for maintainers](https://www.drips.network/blog/posts/creating-meaningful-issues);
+a cycle can change them, so confirm on `drips.network/wave/stellar` before the Wave opens. Every issue states
+its own tier and point value in **Tier and effort** — a contributor should never have to infer what a task is
+worth. Complexity is communicated in the issue body and the Wave dashboard, not by inventing extra GitHub
+labels: `tier/*` is Kinlock's bookkeeping and nothing else.
 
 Tier rules:
 
 - **Never inflate.** A task that "could" take longer because someone might fight the toolchain is
-  `medium` with the friction named in **Questions**, not `high`.
+  `medium` with the friction named in **Questions**, not `high`. When the clock and the judgement point at
+  different tiers, say so on the issue — disclose the seam and invite the contributor to challenge it
+  before starting, rather than picking a number and hoping nobody notices. Points are a trust signal.
 - **Never split to farm points.** Two halves of one change is one issue.
 - **Blocked work is not a lower tier.** If a dependency row is not `DONE`, use `blocked:m0` or state
   the blocker in **Related roadmap rows**; a `BLOCKED` row does not become a Wave issue.
@@ -89,6 +106,10 @@ Before filing a batch:
 3. Confirm no issue touches an out-of-scope path above; if the value is real, file it as a maintainer
    task instead, without a tier label.
 4. Assign a tier and an effort estimate before publishing, never after (see `W-01` note 3).
+5. Read the finished issue as a newcomer who has never seen the repo. You should be able to answer,
+   without asking: what exactly to do, what not to touch, where the traps are, what "done" means, which
+   commands prove it, what the PR must contain, how it will be reviewed, and what it is worth. If any of
+   those needs a question, the issue is not ready — fix it before publishing.
 
 After filing:
 
