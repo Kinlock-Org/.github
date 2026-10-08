@@ -69,6 +69,14 @@ is welcome and should be posted on the issue before building.
 
 1.
 
+## Edge cases and traps
+
+Two to five bullets: the boundaries, failure modes and tempting shortcuts specific to this task. This is
+the section that removes the round trip — if a contributor would otherwise have to ask, answer it here.
+Write "None beyond what is written above" only when it is genuinely true.
+
+-
+
 ## Done means
 
 Binary and checkable, one line each. Anything a reviewer cannot verify by looking is not a criterion.
@@ -96,7 +104,11 @@ Run every command and paste the real output in the PR. We do not accept "should 
 
 ## Opening the pull request
 
-- Branch `feat/…`, `fix/…`, `docs/…`, `test/…` or `chore/…`; Conventional Commit subject.
+- **Assignment is required before you start.** Comment on this issue and wait to be assigned. Do not
+  open a PR against an issue someone already holds — if it has been quiet, ask us to release it first.
+- `Closes #<issue number>` in the PR description, so the issue and the PR link automatically.
+- Branch `feat/…`, `fix/…`, `docs/…`, `test/…` or `chore/…`. Commit subject example:
+  `<type>(<scope>): <what landed>`
 - Update `ROADMAP.md` in the same PR (`AGENTS.md` §12): row status, a Changelog entry, `Last updated`.
   CI fails a PR without it. Only rows owned by this repo.
 - Follow `.github/PULL_REQUEST_TEMPLATE.md` (`AGENTS.md` §7); in "Hard rules / invariants touched",
@@ -104,11 +116,27 @@ Run every command and paste the real output in the PR. We do not accept "should 
 - One logical change. Do not reformat or touch files outside **Scope**.
 - Do not add the `security-sensitive` label — that is the maintainer's flag for contract-logic PRs.
 - Never commit to `main`; open a PR. Never force-push.
+- **Evidence for the PR:** the real output of every command under **Verify before you open the PR**.
+  For UI work, before/after screenshots in both colour schemes. For performance work, the measured
+  before/after numbers. A claim without its evidence is returned.
+
+## How we review
+
+Two maintainers: one reviews correctness against the hard rules and the roadmap row's **Done when**, the
+other reviews diff scope and whether the tests were actually run. Order is hard-rule correctness → tests
+really executed → diff stays inside **Scope** → style last. First response on a PR: 2 business days.
+
+What fails review fastest: a change outside **Scope**, a deleted or weakened assertion, a claim with no
+command output behind it, and a `ROADMAP.md` with no Changelog entry (`AGENTS.md` §12).
+For this issue, look first at <the one thing that proves this task was actually done>.
 
 ## Tier and effort
 
-`tier/trivial` | `tier/medium` | `tier/high` · roughly \<hours or days\>. Definitions and the Wave
-point mapping: `docs/wave-issue-format.md` in `Kinlock-Org/.github`.
+`tier/trivial` | `tier/medium` | `tier/high` · roughly \<hours or days\>, estimated for someone who has
+**not** seen this codebase. State the Wave complexity tag and its points: the published mapping is
+Trivial 100 · Medium 150 · High 200 ([Drips' maintainer guide](https://www.drips.network/blog/posts/creating-meaningful-issues)),
+and the cycle's own values are confirmed on [drips.network/wave/stellar](https://www.drips.network/wave/stellar)
+before the Wave opens. Kinlock's tier rules: `docs/wave-issue-format.md`.
 
 ## Related roadmap rows
 
