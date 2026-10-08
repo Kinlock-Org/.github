@@ -4,6 +4,8 @@ Lock USDC on Stellar for a verified school or landlord anywhere in the world. Fu
 
 Worldwide by design, launched market by market. Testnet only until audit and legal review.
 
+**Live app (testnet):** [kinlock-app.vercel.app](https://kinlock-app.vercel.app)
+
 | Repo | What it is |
 |---|---|
 | [`kinlock-contracts`](https://github.com/Kinlock-Org/kinlock-contracts) | Soroban contract (registry + vault), tests, deploy scripts, bindings |
