@@ -4,7 +4,7 @@
 
 | | |
 |---|---|
-| **Last updated** | 2026-10-07 (W-02 seed issues) |
+| **Last updated** | 2026-10-07 (F-16 branch protection) |
 | **Docs baseline** | v0.3, worldwide scope (`PRD.md`, `ARCHITECTURE.md`, `ARCHITECTURE_ESSENTIALS.md`, `AGENTS.md`, `CLAUDE.md`, `project_structure.md`) |
 | **Current phase** | Phase 0 (Foundations) → starting Phase 1 (M0 Validate) |
 | **Readiness** | See [§3](#3-progress-snapshot) |
@@ -127,7 +127,7 @@ Readiness % = `DONE ÷ (all rows − DEFERRED − DROPPED)`. Conditional rows (P
 
 | Phase | Total | DONE | IN PROGRESS | TODO | BLOCKED | DEFERRED | DROPPED | Readiness |
 |---|---|---|---|---|---|---|---|---|
-| 0 Foundations | 19 | 13 | 1 | 5 | 0 | 0 | 0 | 68% |
+| 0 Foundations | 19 | 15 | 1 | 3 | 0 | 0 | 0 | 79% |
 | 1 M0 Validate | 17 | 1 | 5 | 11 | 0 | 0 | 0 | 6% |
 | 2 Contract + registry | 36 | 16 | 5 | 15 | 0 | 0 | 0 | 44% |
 | 3 SDK + indexer | 19 | 1 | 1 | 17 | 0 | 0 | 0 | 5% |
@@ -139,7 +139,7 @@ Readiness % = `DONE ÷ (all rows − DEFERRED − DROPPED)`. Conditional rows (P
 | 9 Conditional ramp | 9 | 0 | 0 | 0 | 0 | 9 | 0 | n/a |
 | 10 Wave + community | 9 | 3 | 1 | 5 | 0 | 0 | 0 | 33% |
 | 11 Deferred parking lot | 16 | 0 | 0 | 0 | 0 | 16 | 0 | n/a |
-| **All** | **200** | **35** | **14** | **126** | **0** | **25** | **0** | **20%** |
+| **All** | **200** | **37** | **14** | **124** | **0** | **25** | **0** | **21%** |
 
 ---
 
@@ -161,11 +161,11 @@ Readiness % = `DONE ÷ (all rows − DEFERRED − DROPPED)`. Conditional rows (P
 | F-09 | Create org `.github` repo: profile README, CoC, CONTRIBUTING, SECURITY, SUPPORT, canonical `docs/`, `templates/` | org | P0 | IN PROGRESS | F-08 | Repo public; docs and templates committed |
 | F-10 | Decide license (org-wide) | org | P0 | DONE | F-08 | ADR written; `LICENSE` template ready |
 | F-11 | Decide package names and distribution | org | P0 | DONE | F-08 | Package names chosen; release process documented and a release installs (ADR-0026) |
-| F-12 | Create GitHub teams: maintainers, contract-reviewers, attesters | org | P0 | TODO | F-08 | Teams exist; handles match `CODEOWNERS` |
+| F-12 | Create GitHub teams: maintainers, contract-reviewers, attesters | org | P0 | DONE | F-08 | Teams exist; handles match `CODEOWNERS` |
 | F-13 | Create label set across repos (`security-sensitive`, `good first issue`, `wave`, `area:*`, `blocked:m0`, `deferred`) | org | P0 | TODO | F-08 | Labels applied via script |
 | F-14 | Write `scripts/sync-docs` and the `docs-in-sync` CI job | org | P0 | DONE | F-09 | CI fails when a vendored copy drifts |
 | F-15 | Write `roadmap-check` CI job and `scripts/roadmap-progress` and `scripts/roadmap-merge` | org | P0 | DONE | F-09 | CI fails PRs without roadmap update; scripts produce correct counts and merges |
-| F-16 | Define branch protection and repo settings (required reviews, required checks, no force-push to `main`) | org | P0 | TODO | F-12 | Applied to all repos; documented |
+| F-16 | Define branch protection and repo settings (required reviews, required checks, no force-push to `main`) | org | P0 | DONE | F-12 | Applied to all repos; documented |
 | F-17 | Create PR template and issue templates (bug, feature, wave-task) with Roadmap section | org | P0 | DONE | F-09 | Templates live in org `.github` and each repo |
 | F-18 | Cross-doc consistency review after any M0-driven change | org | P1 | TODO | M0-12 | All docs agree; ADR index current |
 | F-19 | Reconcile docs with scaffold findings: Next.js 16 renamed `middleware.ts` to `proxy.ts`; contract `tests/` must live in `contracts/kinlock/tests/` (a virtual Cargo workspace root can't hold integration tests); GitHub org is `Kinlock-Org`, not `kinlock`; request-link helpers are not in the SDK public API list; `TrancheInput` type added for `create_lock`; accept ADR-0017 and add it to the ADR indexes | org | P1 | TODO | — | Docs and scaffold agree; ADR-0017 accepted or rejected |
@@ -524,6 +524,8 @@ Newest first. One entry per PR. Required for every contribution (see §2).
 
 | Date | PR / ref | Repo | Rows touched | Summary |
 |---|---|---|---|---|
+| 2026-10-07 | `chore/f16-branch-protection` | org | DONE: F-16 | Applied branch protection to `main` on all 5 repos: required status checks (repo-specific CI jobs, confirmed via recent PR check names so none are a path-filtered context that would never report), 1 required approving review + CODEOWNERS review, no force-push, no deletion. `.github` has no CI so only PR-required + no-force-push/delete there. This is a workflow change: merges now need an actual approval, not just green CI |
+| 2026-10-07 | `chore/f12-teams` | org | DONE: F-12 | Created `maintainers` (abrcrmb, YazarAyobami, maintain access on all 5 repos), `contract-reviewers` (abrcrmb, YazarAyobami, maintain access on kinlock-contracts/sdk/app), and `attesters` (empty, push access on kinlock-registry so its `payees/**` rule resolves). Verified: `GET /repos/{repo}/codeowners/errors` returns zero errors on all 4 active repos (previously all failed with "Unknown owner"). Unblocks `F-16` (branch protection), `W-06`, `W-07` |
 | 2026-10-07 | `chore/w02-seed-issues` | org | DONE: W-02 | Seeded 5 Wave-scoped issues from existing roadmap rows across all 4 active repos: `kinlock-app#15` (M3-17 accessibility), `kinlock-app#16` (M3-20 copy review), `kinlock-sdk#25` (M2-17 docs), `kinlock-registry#7` (M1-26 attester checklist), `kinlock-contracts#17` (M1-21 threat-model docs, docs-only). All drawn from `project_structure.md` §8's "safe for broad contribution" list; none touch fund logic, auth, or claim-link-fragment code. Unblocked by `kinlock-contracts` closing `M1-01` this same pass |
 | 2026-10-07 | `docs/scf-readiness` | org | DONE: W-09 (new row). IN PROGRESS: M0-14 | Audited Kinlock against the official SCF Build Award handbook (license, contributor/community guidelines, roadmap-deliverable clarity, technical-integration brief, differentiation). Fixed the unfilled `Copyright [yyyy] [name of copyright owner]` placeholder in every repo's `LICENSE` (→ "Kinlock Contributors," pending `DEC-13`) and added `ISSUE_TEMPLATE/config.yml` (GitHub's community-profile check was reporting `issue_template: false` despite the templates existing). Found `CODEOWNERS` is non-functional — it references `F-12` teams that don't exist yet. Could not verify "BarakahPay" as a real product via web search; found real comparables (RemitaPay, Circle Arc "Remit") instead. Full findings and "needs a human" list in `docs/scf-readiness.md` |
 | 2026-10-07 | `docs/m0-10-wave-rules` | org | DONE: M0-10. IN PROGRESS: W-01 | Added `docs/research/m0-10-wave-rules.md`: Drips Stellar Wave mechanics (issue sizing tiers, per-user/per-org repo-application limits that reset each cycle, KYC required to submit an application and to withdraw rewards), sourced from official docs. Confirms the existing plan to apply only the four active repos; flags KYC as a blocking prerequisite for a human to complete before `W-01` can reach `DONE`. One `wave` label created on `kinlock-contracts` toward `F-13`; the full label rollout across all four repos is prepared as a script for the maintainer to run (bulk label writes across repos were blocked for the agent) |
