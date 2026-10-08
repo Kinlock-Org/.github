@@ -42,7 +42,10 @@ const ROW = /^\| ((?:[A-Z]+\d*|DEC)-\d+) \|/;
 // The copies sit at different depths: this one is docs/ROADMAP.md, each repo's is ROADMAP.md at the
 // repo root, so the same relative link is legitimately written two ways. Normalize on read so a
 // path difference is compared as equal instead of surfacing as a row conflict.
-const read = (p) => readFileSync(p, "utf8").replaceAll("](docs/adr/", "](adr/").split("\n");
+// Anchor on the numeric ADR filename. Prose can quote a link prefix, and an unanchored replace would
+// rewrite that prose, so the copies would stop matching line for line and a merge would emit a
+// sentence its own Changelog entry contradicts.
+const read = (p) => readFileSync(p, "utf8").replace(/\]\(docs\/adr\/(?=\d)/g, "](adr/").split("\n");
 const rowId = (line) => line.match(ROW)?.[1] ?? null;
 const repoOf = (line) => line.split("|")[3]?.trim();
 
