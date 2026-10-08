@@ -4,7 +4,7 @@
 
 | | |
 |---|---|
-| **Last updated** | 2026-10-07 |
+| **Last updated** | 2026-10-08 (W-10 expanded to documentation-issue hub) |
 | **Docs baseline** | v0.3, worldwide scope (`PRD.md`, `ARCHITECTURE.md`, `ARCHITECTURE_ESSENTIALS.md`, `AGENTS.md`, `CLAUDE.md`, `project_structure.md`) |
 | **Current phase** | Phase 0 (Foundations) → starting Phase 1 (M0 Validate) |
 | **Readiness** | See [§3](#3-progress-snapshot) |
@@ -127,8 +127,8 @@ Readiness % = `DONE ÷ (all rows − DEFERRED − DROPPED)`. Conditional rows (P
 
 | Phase | Total | DONE | IN PROGRESS | TODO | BLOCKED | DEFERRED | DROPPED | Readiness |
 |---|---|---|---|---|---|---|---|---|
-| 0 Foundations | 19 | 13 | 1 | 5 | 0 | 0 | 0 | 68% |
-| 1 M0 Validate | 17 | 0 | 1 | 16 | 0 | 0 | 0 | 0% |
+| 0 Foundations | 19 | 16 | 1 | 2 | 0 | 0 | 0 | 84% |
+| 1 M0 Validate | 17 | 1 | 6 | 10 | 0 | 0 | 0 | 6% |
 | 2 Contract + registry | 36 | 16 | 5 | 15 | 0 | 0 | 0 | 44% |
 | 3 SDK + indexer | 19 | 1 | 1 | 17 | 0 | 0 | 0 | 5% |
 | 4 App | 24 | 1 | 1 | 22 | 0 | 0 | 0 | 4% |
@@ -137,9 +137,9 @@ Readiness % = `DONE ÷ (all rows − DEFERRED − DROPPED)`. Conditional rows (P
 | 7 Hardening | 26 | 0 | 0 | 26 | 0 | 0 | 0 | 0% |
 | 8 Launch | 8 | 0 | 0 | 8 | 0 | 0 | 0 | 0% |
 | 9 Conditional ramp | 9 | 0 | 0 | 0 | 0 | 9 | 0 | n/a |
-| 10 Wave + community | 8 | 1 | 0 | 7 | 0 | 0 | 0 | 13% |
+| 10 Wave + community | 10 | 4 | 1 | 5 | 0 | 0 | 0 | 40% |
 | 11 Deferred parking lot | 16 | 0 | 0 | 0 | 0 | 16 | 0 | n/a |
-| **All** | **199** | **32** | **9** | **133** | **0** | **25** | **0** | **18%** |
+| **All** | **201** | **39** | **15** | **122** | **0** | **25** | **0** | **22%** |
 
 ---
 
@@ -161,11 +161,11 @@ Readiness % = `DONE ÷ (all rows − DEFERRED − DROPPED)`. Conditional rows (P
 | F-09 | Create org `.github` repo: profile README, CoC, CONTRIBUTING, SECURITY, SUPPORT, canonical `docs/`, `templates/` | org | P0 | IN PROGRESS | F-08 | Repo public; docs and templates committed |
 | F-10 | Decide license (org-wide) | org | P0 | DONE | F-08 | ADR written; `LICENSE` template ready |
 | F-11 | Decide package names and distribution | org | P0 | DONE | F-08 | Package names chosen; release process documented and a release installs (ADR-0026) |
-| F-12 | Create GitHub teams: maintainers, contract-reviewers, attesters | org | P0 | TODO | F-08 | Teams exist; handles match `CODEOWNERS` |
-| F-13 | Create label set across repos (`security-sensitive`, `good first issue`, `wave`, `area:*`, `blocked:m0`, `deferred`) | org | P0 | TODO | F-08 | Labels applied via script |
+| F-12 | Create GitHub teams: maintainers, contract-reviewers, attesters | org | P0 | DONE | F-08 | Teams exist; handles match `CODEOWNERS` |
+| F-13 | Create label set across repos (`security-sensitive`, `good first issue`, `wave`, `area:*`, `blocked:m0`, `deferred`) | org | P0 | DONE | F-08 | Labels applied via script |
 | F-14 | Write `scripts/sync-docs` and the `docs-in-sync` CI job | org | P0 | DONE | F-09 | CI fails when a vendored copy drifts |
 | F-15 | Write `roadmap-check` CI job and `scripts/roadmap-progress` and `scripts/roadmap-merge` | org | P0 | DONE | F-09 | CI fails PRs without roadmap update; scripts produce correct counts and merges |
-| F-16 | Define branch protection and repo settings (required reviews, required checks, no force-push to `main`) | org | P0 | TODO | F-12 | Applied to all repos; documented |
+| F-16 | Define branch protection and repo settings (required reviews, required checks, no force-push to `main`) | org | P0 | DONE | F-12 | Applied to all repos; documented |
 | F-17 | Create PR template and issue templates (bug, feature, wave-task) with Roadmap section | org | P0 | DONE | F-09 | Templates live in org `.github` and each repo |
 | F-18 | Cross-doc consistency review after any M0-driven change | org | P1 | TODO | M0-12 | All docs agree; ADR index current |
 | F-19 | Reconcile docs with scaffold findings: Next.js 16 renamed `middleware.ts` to `proxy.ts`; contract `tests/` must live in `contracts/kinlock/tests/` (a virtual Cargo workspace root can't hold integration tests); GitHub org is `Kinlock-Org`, not `kinlock`; request-link helpers are not in the SDK public API list; `TrancheInput` type added for `create_lock`; accept ADR-0017 and add it to the ADR indexes | org | P1 | TODO | — | Docs and scaffold agree; ADR-0017 accepted or rejected |
@@ -180,20 +180,20 @@ Readiness % = `DONE ÷ (all rows − DEFERRED − DROPPED)`. Conditional rows (P
 
 | ID | Task | Repo | Pri | Status | Depends on | Done when |
 |---|---|---|---|---|---|---|
-| M0-01 | Interview 15 senders across at least 2 candidate markets (script + note template) | org | P0 | TODO | F-08 | Notes stored; themes summarized; willingness to use USDC recorded |
-| M0-02 | Interview 5 payees (schools, landlords) in candidate markets, incl. willingness to operate a wallet | org | P0 | TODO | F-08 | At least 3 of 5 answers recorded against the §8.2 trigger |
-| M0-03 | Talk to at least 2 attesters (associations, NGOs) about accountability and process | org | P0 | TODO | F-08 | Named willing attesters or a documented "no" |
-| M0-04 | Build sender all-in cost model vs incumbent routes | org | P0 | TODO | M0-01 | Spreadsheet with fees at each hop; target cost set (`M0-13`) |
+| M0-01 | Interview 15 senders across at least 2 candidate markets (script + note template) | org | P0 | IN PROGRESS | F-08 | Notes stored; themes summarized; willingness to use USDC recorded |
+| M0-02 | Interview 5 payees (schools, landlords) in candidate markets, incl. willingness to operate a wallet | org | P0 | IN PROGRESS | F-08 | At least 3 of 5 answers recorded against the §8.2 trigger |
+| M0-03 | Talk to at least 2 attesters (associations, NGOs) about accountability and process | org | P0 | IN PROGRESS | F-08 | Named willing attesters or a documented "no" |
+| M0-04 | Build sender all-in cost model vs incumbent routes | org | P0 | IN PROGRESS | M0-01 | Spreadsheet with fees at each hop; target cost set (`M0-13`) |
 | M0-05 | Off-ramp spike **per candidate market**: identify local-currency anchors and wallet routes (or whether payees can simply hold USDC); test SEP-1/10/24 on testnet; record assets, minimums, fees | org | P0 | TODO | — | Table of viable routes or a documented "none" |
 | M0-06 | Payee usability test: onboard 3–5 payees on testnet using the attester checklist | org | P0 | TODO | M0-02 | Task completion rates and pain points recorded |
 | M0-07 | Counsel intro call; written scoping of legal questions **per candidate market** (stablecoin acceptance by domestic payees, money transmission, sanctions and restricted jurisdictions, data protection including where senders live, terms) | org | P0 | TODO | — | Counsel engaged; question list and timeline agreed |
 | M0-08 | Verify network facts: max entry TTL, RPC event retention, SAC/trustline failure behavior, USDC issuer flags (freeze, authorization, clawback) | contracts | P0 | IN PROGRESS | — | Findings written; `MAX_LOCK_DURATION` confirmed or changed via ADR |
 | M0-09 | Research archive/backfill options for receipt verification (tier 3) and indexer gap recovery | sdk | P0 | TODO | M0-08 | Option chosen and costed; ADR drafted |
-| M0-10 | Review Drips Wave rules: application limits, KYC, issue-sizing guidelines | org | P1 | TODO | — | Short note; Wave plan (`W-01`) adjusted |
+| M0-10 | Review Drips Wave rules: application limits, KYC, issue-sizing guidelines | org | P1 | DONE | — | Short note; Wave plan (`W-01`) adjusted |
 | M0-11 | Write M0 findings report and go / pivot / stop decision against `PRD.md` §8.2 | org | P0 | TODO | M0-01..M0-09 | Report committed; decision recorded in §10 |
 | M0-12 | Revise PRD, architecture, essentials, and this roadmap per findings | org | P0 | TODO | M0-11 | Docs updated; changed rows noted in Changelog |
 | M0-13 | Set sender all-in cost target and pilot metric thresholds | org | P0 | TODO | M0-04 | Numbers recorded in PRD §8.1 |
-| M0-14 | Competitive note: BarakahPay and other purpose-bound remittance projects | org | P1 | TODO | — | One-page comparison; differentiation confirmed or revised |
+| M0-14 | Competitive note: BarakahPay and other purpose-bound remittance projects | org | P1 | IN PROGRESS | — | One-page comparison; differentiation confirmed or revised |
 | M0-15 | Decide a sustainability/revenue approach (grants, referral, B2B SDK, fee later) | org | P1 | TODO | M0-11 | ADR or PRD §13 answer recorded |
 | M0-16 | Choose pilot market(s) and write market-selection criteria (legal feasibility, attester supply, cash-out route, rate source, sender demand). Candidate: Nigeria plus at least one market in a different region and currency | org | P0 | TODO | M0-01, M0-02, M0-03 | Markets chosen and recorded (`DEC-19`) |
 | M0-17 | Define the supported-countries policy and restricted-jurisdiction approach with counsel (who decides, criteria, how the list changes) | org | P0 | TODO | M0-07 | Policy written; `DEC-20` resolved |
@@ -481,14 +481,16 @@ Resolve each with an ADR and link it here. Move resolved rows to the bottom with
 
 | ID | Task | Repo | Pri | Status | Depends on | Done when |
 |---|---|---|---|---|---|---|
-| W-01 | Prepare Wave applications per repo (description, README, issues), within program limits | org | P1 | TODO | M0-10 | Applications submitted for the four active repos |
-| W-02 | Seed issues: tests and docs in contracts (security-aware), registry tooling, app UI, SDK, indexer fixtures | all | P1 | TODO | M1-01 | Backlog exists; security-sensitive issues excluded from open contribution |
+| W-01 | Prepare Wave applications per repo (description, README, issues), within program limits | org | P1 | IN PROGRESS | M0-10 | Applications submitted for the four active repos |
+| W-02 | Seed issues: tests and docs in contracts (security-aware), registry tooling, app UI, SDK, indexer fixtures | all | P1 | DONE | M1-01 | Backlog exists; security-sensitive issues excluded from open contribution |
 | W-03 | Org and repo `CONTRIBUTING.md` including the roadmap rule | org | P0 | DONE | F-09 | Rule stated prominently |
 | W-04 | Contributor quick-start tested on a clean machine for each repo | all | P1 | TODO | M3-01 | New contributor runs tests in under 15 minutes |
 | W-05 | Issue sizing guide aligned with current program guidelines | org | P1 | TODO | M0-10 | Guide published |
 | W-06 | PR review SLAs and triage routine | org | P1 | TODO | F-12 | Documented; rota exists |
 | W-07 | Maintainer rota for `security-sensitive` PRs | org | P1 | TODO | F-12 | Named reviewers per week |
 | W-08 | Track application limits and KYC requirements per cycle | org | P2 | TODO | W-01 | Calendar and owner set |
+| W-09 | SCF / open-source readiness audit against the official SCF Build Award handbook: license, contributor/community guidelines, roadmap-deliverable clarity (tranche-mapped), technical-integration brief | org | P1 | DONE | — | `docs/scf-readiness.md` published; `LICENSE` copyright line and `ISSUE_TEMPLATE/config.yml` gaps fixed and verified via the GitHub community-profile API |
+| W-10 | Hosted documentation site covering all 4 repos and how they fit together, and the org's hub for filing/routing documentation issues | org | P1 | DONE | — | `Kinlock-Org/Kinlock-Org.github.io` published via GitHub Pages at `kinlock-org.github.io`; landing page plus one section per repo; links out to the canonical docs rather than duplicating them; linked from the org profile and every repo's README; documentation issue template, `area:*` labels, and `CONTRIBUTING.md` route doc gaps from any repo to this one |
 
 ---
 
@@ -524,6 +526,15 @@ Newest first. One entry per PR. Required for every contribution (see §2).
 | Date | PR / ref | Repo | Rows touched | Summary |
 |---|---|---|---|---|
 | 2026-10-08 | `docs/readme-refresh` | org | no row changes | Rewrote the org profile README: what Kinlock proves and what it does not, every repo including the docs hub and the conditional `kinlock-ramp`, the principles, the trust assumptions, and the every-PR `ROADMAP.md` rule. Folds in the pending verified-payee wording and the docs-hub links |
+| 2026-10-08 | `docs/docs-hub-link` (org) + `Kinlock-Org.github.io#1` | org | DONE: W-10 (expanded scope, no status change) | Repositioned the docs site repo as the org's documentation-issue hub, not just a static site: a documentation issue template, `area:contract`/`area:sdk`/`area:app`/`area:registry`/`area:site` labels for routing, a new `CONTRIBUTING.md` explaining where a fix actually lands (that repo, if it needs code; the canonical `.github` docs, if it's architecture/PRD/ADRs; this repo, if it's the site itself), and a "File a documentation issue" section on the landing page. Linked from the org profile |
+| 2026-10-08 | `docs/live-app-link` (org) + direct push to new repo `Kinlock-Org.github.io` | org | DONE: W-10 (new row) | Published a hosted documentation site at `kinlock-org.github.io` (plain static HTML/CSS, no framework, no build step): a landing page explaining how the 4 repos fit together, plus one section per repo summarizing real facts (entry points, invariants, public API, testnet contract ID, test counts) with links out to the canonical docs for full depth, not a duplicate copy. Linked from the org profile README and every repo's own README. Pushed directly to `main` (new, empty repo, nothing to review against yet) |
+| 2026-10-08 | `docs/m0-04-cost-model-template` | org | DONE: F-13 (found undone from an earlier pass). IN PROGRESS: M0-04 | Rebuilt on current `main` after `chore/f12-f16-governance` (#18) merged, to avoid a `ROADMAP.md` conflict. Added `docs/research/m0-04-cost-model-template.md`: the hop-by-hop cost structure `M0-04` asks for, seeded with cited public benchmarks (World Bank Remittance Prices Worldwide global average 6.49%; USDC on/off-ramp fee ranges; Stellar's ~$0.0001 on-chain fee) — explicitly illustrative, not Kinlock-specific; real numbers still need `M0-01` and `M0-05`, neither run yet. `M0-13` stays `TODO`, still blocked on this. Also closed `F-13` (label set): labels were actually created and verified across all 4 active repos in an earlier session pass, but the row was never flipped from `TODO` |
+| 2026-10-07 | `chore/f16-branch-protection` | org | DONE: F-16 | Applied branch protection to `main` on all 5 repos: required status checks (repo-specific CI jobs, confirmed via recent PR check names so none are a path-filtered context that would never report), 1 required approving review + CODEOWNERS review, no force-push, no deletion. `.github` has no CI so only PR-required + no-force-push/delete there. This is a workflow change: merges now need an actual approval, not just green CI |
+| 2026-10-07 | `chore/f12-teams` | org | DONE: F-12 | Created `maintainers` (abrcrmb, YazarAyobami, maintain access on all 5 repos), `contract-reviewers` (abrcrmb, YazarAyobami, maintain access on kinlock-contracts/sdk/app), and `attesters` (empty, push access on kinlock-registry so its `payees/**` rule resolves). Verified: `GET /repos/{repo}/codeowners/errors` returns zero errors on all 4 active repos (previously all failed with "Unknown owner"). Unblocks `F-16` (branch protection), `W-06`, `W-07` |
+| 2026-10-07 | `chore/w02-seed-issues` | org | DONE: W-02 | Seeded 5 Wave-scoped issues from existing roadmap rows across all 4 active repos: `kinlock-app#15` (M3-17 accessibility), `kinlock-app#16` (M3-20 copy review), `kinlock-sdk#25` (M2-17 docs), `kinlock-registry#7` (M1-26 attester checklist), `kinlock-contracts#17` (M1-21 threat-model docs, docs-only). All drawn from `project_structure.md` §8's "safe for broad contribution" list; none touch fund logic, auth, or claim-link-fragment code. Unblocked by `kinlock-contracts` closing `M1-01` this same pass |
+| 2026-10-07 | `docs/scf-readiness` | org | DONE: W-09 (new row). IN PROGRESS: M0-14 | Audited Kinlock against the official SCF Build Award handbook (license, contributor/community guidelines, roadmap-deliverable clarity, technical-integration brief, differentiation). Fixed the unfilled `Copyright [yyyy] [name of copyright owner]` placeholder in every repo's `LICENSE` (→ "Kinlock Contributors," pending `DEC-13`) and added `ISSUE_TEMPLATE/config.yml` (GitHub's community-profile check was reporting `issue_template: false` despite the templates existing). Found `CODEOWNERS` is non-functional — it references `F-12` teams that don't exist yet. Could not verify "BarakahPay" as a real product via web search; found real comparables (RemitaPay, Circle Arc "Remit") instead. Full findings and "needs a human" list in `docs/scf-readiness.md` |
+| 2026-10-07 | `docs/m0-10-wave-rules` | org | DONE: M0-10. IN PROGRESS: W-01 | Added `docs/research/m0-10-wave-rules.md`: Drips Stellar Wave mechanics (issue sizing tiers, per-user/per-org repo-application limits that reset each cycle, KYC required to submit an application and to withdraw rewards), sourced from official docs. Confirms the existing plan to apply only the four active repos; flags KYC as a blocking prerequisite for a human to complete before `W-01` can reach `DONE`. One `wave` label created on `kinlock-contracts` toward `F-13`; the full label rollout across all four repos is prepared as a script for the maintainer to run (bulk label writes across repos were blocked for the agent) |
+| 2026-10-07 | `docs/m0-interview-materials` | org | IN PROGRESS: M0-01, M0-02, M0-03 | Added `docs/research/` with a sender interview script + note template (M0-01), payee interview script + note template (M0-02), and an attester conversation guide (M0-03), each mapped to `PRD.md` §8.2 pivot triggers and §10 assumptions, with log tables for findings. Scripts/templates only — no real interviews conducted yet, so rows stay `IN PROGRESS` pending actual notes and the themes summary |
 | 2026-10-07 | .github docs/adr-sdk-getpayee | org | no row changes | ADR-0030: SDK gains `getPayee` (chain read) so money pages apply the full refund rule; AGENTS.md §8.2 lists it |
 | 2026-10-07 | .github docs/adr-receipts | org | no row changes | ADR-0029: receipt verification tiers and results; indexer event lookup as a tier-2 aid |
 | 2026-10-07 | .github docs/adr-sdk-preflight | org | no row changes | ADR-0028: SDK preflight results (pass/fail/unknown with block/warn severity), optional `indexerUrl` for the two indexer-backed warnings |
