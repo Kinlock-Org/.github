@@ -523,6 +523,7 @@ Newest first. One entry per PR. Required for every contribution (see §2).
 
 | Date | PR / ref | Repo | Rows touched | Summary |
 |---|---|---|---|---|
+| 2026-10-08 | `docs/readme-refresh` | org | no row changes | Rewrote the org profile README: what Kinlock proves and what it does not, every repo including the docs hub and the conditional `kinlock-ramp`, the principles, the trust assumptions, and the every-PR `ROADMAP.md` rule. Folds in the pending verified-payee wording and the docs-hub links |
 | 2026-10-07 | .github docs/adr-sdk-getpayee | org | no row changes | ADR-0030: SDK gains `getPayee` (chain read) so money pages apply the full refund rule; AGENTS.md §8.2 lists it |
 | 2026-10-07 | .github docs/adr-receipts | org | no row changes | ADR-0029: receipt verification tiers and results; indexer event lookup as a tier-2 aid |
 | 2026-10-07 | .github docs/adr-sdk-preflight | org | no row changes | ADR-0028: SDK preflight results (pass/fail/unknown with block/warn severity), optional `indexerUrl` for the two indexer-backed warnings |
