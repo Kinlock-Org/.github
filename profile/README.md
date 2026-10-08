@@ -1,6 +1,6 @@
 # Kinlock
 
-Lock USDC on Stellar for a verified school or landlord anywhere in the world. Funds can only reach that payee's payout address or go back to the sender, and anyone can verify the receipt on-chain.
+Lock USDC on Stellar for a verified payee anywhere in the world. Funds can only reach that payee's payout address or go back to the sender, and anyone can verify the receipt on-chain.
 
 Worldwide by design, launched market by market. Testnet only until audit and legal review.
 

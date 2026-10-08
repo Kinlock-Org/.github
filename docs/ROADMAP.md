@@ -4,7 +4,7 @@
 
 | | |
 |---|---|
-| **Last updated** | 2026-10-07 |
+| **Last updated** | 2026-10-08 (wording: "verified payee" replaces "school or landlord" in mission copy) |
 | **Docs baseline** | v0.3, worldwide scope (`PRD.md`, `ARCHITECTURE.md`, `ARCHITECTURE_ESSENTIALS.md`, `AGENTS.md`, `CLAUDE.md`, `project_structure.md`) |
 | **Current phase** | Phase 0 (Foundations) → starting Phase 1 (M0 Validate) |
 | **Readiness** | See [§3](#3-progress-snapshot) |
@@ -523,6 +523,7 @@ Newest first. One entry per PR. Required for every contribution (see §2).
 
 | Date | PR / ref | Repo | Rows touched | Summary |
 |---|---|---|---|---|
+| 2026-10-08 | .github docs/verified-payee-wording | org | no row changes | Wording: in the mission-statement-style sentences (`AGENTS.md`, `PRD.md` summary, `ARCHITECTURE_ESSENTIALS.md`, org profile README), "a verified school or landlord" read as narrower than the product actually is; replaced with "a verified payee" (already a defined term). Left unchanged the spots that factually describe the two current MVP categories (School/Rent) rather than pitch the product: PRD's Markets row, stakeholder table, illustrative examples, and the B4 pilot-plan cell. Propagated via `scripts/sync-docs.sh` to all 4 code repos; `kinlock-app`'s UI copy (`messages/en.json`) updated in its own PR |
 | 2026-10-07 | .github docs/adr-sdk-getpayee | org | no row changes | ADR-0030: SDK gains `getPayee` (chain read) so money pages apply the full refund rule; AGENTS.md §8.2 lists it |
 | 2026-10-07 | .github docs/adr-receipts | org | no row changes | ADR-0029: receipt verification tiers and results; indexer event lookup as a tier-2 aid |
 | 2026-10-07 | .github docs/adr-sdk-preflight | org | no row changes | ADR-0028: SDK preflight results (pass/fail/unknown with block/warn severity), optional `indexerUrl` for the two indexer-backed warnings |
