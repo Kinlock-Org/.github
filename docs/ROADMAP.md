@@ -4,7 +4,7 @@
 
 | | |
 |---|---|
-| **Last updated** | 2026-10-08 (W-05 resolved; 17 Wave issues seeded with seven new rows; issue format proofed against Drips' maintainer guide; the three pre-format issues triaged — app #16 re-emitted, app #15 and registry #7 closed as superseded; repo-side Changelog lines unioned back into canonical by `scripts/roadmap-merge`; that merge's ADR-link normalization anchored so quoted prose cannot be rewritten) |
+| **Last updated** | 2026-10-26 (added `F-20`: OpenSSF Scorecard CI for this repo; same workflow added independently across `kinlock-contracts`/`sdk`/`app`/`registry`) |
 | **Docs baseline** | v0.3, worldwide scope (`PRD.md`, `ARCHITECTURE.md`, `ARCHITECTURE_ESSENTIALS.md`, `AGENTS.md`, `CLAUDE.md`, `project_structure.md`) |
 | **Current phase** | Phase 0 (Foundations) → starting Phase 1 (M0 Validate) |
 | **Readiness** | See [§3](#3-progress-snapshot) |
@@ -127,7 +127,7 @@ Readiness % = `DONE ÷ (all rows − DEFERRED − DROPPED)`. Conditional rows (P
 
 | Phase | Total | DONE | IN PROGRESS | TODO | BLOCKED | DEFERRED | DROPPED | Readiness |
 |---|---|---|---|---|---|---|---|---|
-| 0 Foundations | 19 | 16 | 1 | 2 | 0 | 0 | 0 | 84% |
+| 0 Foundations | 20 | 16 | 2 | 2 | 0 | 0 | 0 | 80% |
 | 1 M0 Validate | 17 | 1 | 6 | 10 | 0 | 0 | 0 | 6% |
 | 2 Contract + registry | 41 | 24 | 3 | 14 | 0 | 0 | 0 | 59% |
 | 3 SDK + indexer | 21 | 14 | 3 | 4 | 0 | 0 | 0 | 67% |
@@ -139,7 +139,7 @@ Readiness % = `DONE ÷ (all rows − DEFERRED − DROPPED)`. Conditional rows (P
 | 9 Conditional ramp | 9 | 0 | 0 | 0 | 0 | 9 | 0 | n/a |
 | 10 Wave + community | 10 | 5 | 1 | 4 | 0 | 0 | 0 | 50% |
 | 11 Deferred parking lot | 16 | 0 | 0 | 0 | 0 | 16 | 0 | n/a |
-| **All** | **211** | **75** | **21** | **90** | **0** | **25** | **0** | **40%** |
+| **All** | **212** | **75** | **22** | **90** | **0** | **25** | **0** | **40%** |
 
 ---
 
@@ -169,6 +169,7 @@ Readiness % = `DONE ÷ (all rows − DEFERRED − DROPPED)`. Conditional rows (P
 | F-17 | Create PR template and issue templates (bug, feature, wave-task) with Roadmap section | org | P0 | DONE | F-09 | Templates live in org `.github` and each repo |
 | F-18 | Cross-doc consistency review after any M0-driven change | org | P1 | TODO | M0-12 | All docs agree; ADR index current |
 | F-19 | Reconcile docs with scaffold findings: Next.js 16 renamed `middleware.ts` to `proxy.ts`; contract `tests/` must live in `contracts/kinlock/tests/` (a virtual Cargo workspace root can't hold integration tests); GitHub org is `Kinlock-Org`, not `kinlock`; request-link helpers are not in the SDK public API list; `TrancheInput` type added for `create_lock`; accept ADR-0017 and add it to the ADR indexes | org | P1 | TODO | — | Docs and scaffold agree; ADR-0017 accepted or rejected |
+| F-20 | Add OpenSSF Scorecard CI (`ossf/scorecard-action`) to this repo: weekly supply-chain security posture scan published to the public Scorecard API/badge | org | P2 | IN PROGRESS | — | `.github/workflows/scorecard.yml` runs on push to `main` and weekly; results visible on the Security tab and via `https://api.scorecard.dev/projects/github.com/Kinlock-Org/.github/badge`; verified on a real run. The same workflow was also added independently to `kinlock-contracts` (`M1-43`), `kinlock-sdk` (`M2-23`), `kinlock-app` (`M3-30`), and `kinlock-registry` (`M1-44`) in their own PRs |
 
 ---
 
@@ -535,6 +536,7 @@ Newest first. One entry per PR. Required for every contribution (see §2).
 
 | Date | PR / ref | Repo | Rows touched | Summary |
 |---|---|---|---|---|
+| 2026-10-26 | `ci/scorecard` | org | F-20 IN PROGRESS | Added `.github/workflows/scorecard.yml` (OpenSSF Scorecard) to this repo, copied from the current canonical `ossf/scorecard/.github/workflows/scorecard-analysis.yml`, pinned to the same commit SHAs upstream uses. `push`-to-`main` and weekly schedule only (`pull_request` is documented upstream as experimental). `publish_results: true` since this repo is public. The same workflow was added to `kinlock-contracts`, `kinlock-sdk`, `kinlock-app`, and `kinlock-registry` in their own repo-owned PRs on the same date. Left `IN PROGRESS` pending the first real run confirming the job executes and publishes successfully. |
 | 2026-10-08 | `chore/roadmap-copy-back` (#32) | contracts | no row changes | Copy-back run: `ROADMAP.md` replaced with the merged canonical (`.github` main as of #31) in repo-root link form, and §3 recomputed with `scripts/roadmap-progress`. This is the step `roadmap-merge`'s header requires after every merge and that was skipped between 2026-10-06 and 2026-10-08, which is how the seven copies reached 92 divergent statuses. Verified in this checkout: the file equals canonical byte for byte apart from this entry and the ADR link prefix, `W-05` reads `DONE`, the seven Wave rows are present, duplicate row-ID scan is 0. No row, status, priority, dependency or **Done when** was authored in this repo. |
 | 2026-10-08 | `chore/roadmap-copy-back` (#19) | registry | no row changes | Copy-back run: `ROADMAP.md` replaced with the merged canonical (`.github` main as of #31) in repo-root link form, and §3 recomputed with `scripts/roadmap-progress`. This is the step `roadmap-merge`'s header requires after every merge and that was skipped between 2026-10-06 and 2026-10-08, which is how the seven copies reached 92 divergent statuses. Verified in this checkout: the file equals canonical byte for byte apart from this entry and the ADR link prefix, `W-05` reads `DONE`, the seven Wave rows are present, duplicate row-ID scan is 0. No row, status, priority, dependency or **Done when** was authored in this repo. |
 | 2026-10-08 | `chore/roadmap-copy-back` (#39) | sdk | no row changes | Copy-back run: `ROADMAP.md` replaced with the merged canonical (`.github` main as of #31) in repo-root link form, and §3 recomputed with `scripts/roadmap-progress`. This is the step `roadmap-merge`'s header requires after every merge and that was skipped between 2026-10-06 and 2026-10-08, which is how the seven copies reached 92 divergent statuses. Verified in this checkout: the file equals canonical byte for byte apart from this entry and the ADR link prefix, `W-05` reads `DONE`, the seven Wave rows are present, duplicate row-ID scan is 0. No row, status, priority, dependency or **Done when** was authored in this repo. |
