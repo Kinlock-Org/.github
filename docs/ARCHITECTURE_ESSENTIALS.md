@@ -1,6 +1,6 @@
 # Kinlock — Architecture Essentials (v0.3)
 
-> Quick-reference outline. Full detail: `ARCHITECTURE.md`. Product intent: `PRD.md`.
+> Quick-reference outline. Full detail: `ARCHITECTURE.md`. Product intent: `PRD.md`. Contract surface: `ERRORS.md`, `EVENTS.md`.
 > If code and this file disagree, stop and flag it. Don't silently pick one.
 
 ## 1. What this is
