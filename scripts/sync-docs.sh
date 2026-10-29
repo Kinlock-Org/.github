@@ -8,7 +8,7 @@ set -euo pipefail
 
 HERE="$(cd "$(dirname "$0")/.." && pwd)"
 HEADER='> Synced from Kinlock-Org/.github. Do not edit here.'
-DOCS=(PRD.md ARCHITECTURE.md ARCHITECTURE_ESSENTIALS.md)
+DOCS=(PRD.md ARCHITECTURE.md ARCHITECTURE_ESSENTIALS.md ERRORS.md EVENTS.md)
 
 check=0
 if [[ "${1:-}" == "--check" ]]; then check=1; shift; fi
