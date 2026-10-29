@@ -144,7 +144,7 @@ kinlock-contracts/
 ├── tests/
 │   ├── integration.rs                # multi-step flows, C-address accounts, missing trustline
 │   ├── properties.rs                 # proptest: invariants from ARCHITECTURE.md §4.6
-│   └── budget.rs                     # soroban-budget-assert cost tests
+│   └── budget.rs                     # budget-ceiling tests (SDK Env::cost_estimate)
 ├── bindings/
 │   └── typescript/                   # [gen] published as an npm package, consumed by sdk
 ├── scripts/
