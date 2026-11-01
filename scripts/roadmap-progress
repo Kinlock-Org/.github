@@ -30,7 +30,7 @@ for (const line of lines) {
 }
 
 // Keep the existing phase labels from the §3 table.
-const tableStart = lines.findIndex((l) => l.startsWith("| Phase | Total |"));
+const tableStart = lines.findIndex((l) => /^\|\s*Phase\s*\|\s*Total\s*\|/.test(l));
 if (tableStart < 0) throw new Error("§3 progress table not found");
 let tableEnd = tableStart + 2;
 while (lines[tableEnd]?.startsWith("|")) tableEnd++;
