@@ -60,4 +60,17 @@ Start with [`docs/ARCHITECTURE_ESSENTIALS.md`](https://github.com/Kinlock-Org/.g
 - Security vulnerabilities: report privately per [`SECURITY.md`](https://github.com/Kinlock-Org/.github/blob/main/SECURITY.md), never in a public issue.
 - Found a documentation gap anywhere in Kinlock? File it at [`Kinlock-Org.github.io`](https://github.com/Kinlock-Org/Kinlock-Org.github.io/issues/new/choose) with the repo's `area:` label, not as a one-off issue in whichever repo you happened to be reading.
 
+## Maintainers
+
+| Name | Role | GitHub | Contact |
+|---|---|---|---|
+| Adenike Ajala | Core Maintainer (Smart Contracts & Protocol) | [@abrcrmb](https://github.com/abrcrmb) | [Email](mailto:adenikeajala2018@gmail.com) |
+| Ayobami Yazar | Core Maintainer (Full-Stack & Integrations) | [@YazarAyobami](https://github.com/YazarAyobami) | [Email](mailto:Yazarayobami76@gmail.com) |
+
+## Community & Discussions
+
+- **Discussions:** [GitHub Discussions](https://github.com/orgs/Kinlock-Org/discussions)
+- **Documentation Portal:** [kinlock-org.github.io](https://kinlock-org.github.io)
+- **Live Testnet Demo:** [kinlock-app.vercel.app](https://kinlock-app.vercel.app)
+
 Apache-2.0.
